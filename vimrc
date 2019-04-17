@@ -162,7 +162,9 @@ if has('vcon')
   set termguicolors
 endif
 
-packadd! editexisting
+if !&diff
+  packadd! editexisting
+endif
 
 " COPIED FROM
 " https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
