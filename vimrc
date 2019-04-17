@@ -127,25 +127,18 @@ endif
 " ignore whitespace in diff mode
 set diffopt+=iwhite
 
-" show '>   ' at the beginning of lines that are automatically wrapped
-if exists('+breakindent')
-  "set breakindent showbreak=>\ \ \ "breakindentopt=min:20,shift:3,sbr
-  set breakindent showbreak=> breakindentopt=shift:3,sbr
+if has('linebreak')
+  set linebreak
+  set showbreak=>
   set cpoptions+=n " 'showbreak' to appear in between line numbers
+  set breakindent
+  set breakindentopt=shift:3,sbr
 endif
 
-
-"I just found this solution:
-"In insert mode, press Ctrl-R ="\xe2\x86\xaa" Enter.
-"needs +multibyte
-
-  "set linebreak
- " external tool when using grep
-" if executable('pt')
-"   set grepprg=pt
-" elseif executable('ag')
-"   set grepprg=ag
-" endif 
+" external tool when using grep
+if executable('pt')
+  set grepprg=pt
+endif 
 
 set lazyredraw
 
@@ -229,7 +222,7 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "         \\%m%r%w%y%=\%{MU()}\ %k\ %=\ %{FugitiveStatusline()}\ %l/%L,%v\ %p%%
 
 
-"set browsedir=buffer "¿¿?? y quitamos autochdir
+"set browsedir=buffer "¿¿?? and omit autochdir
 
 " You've also got the terminfo or termcap
 
