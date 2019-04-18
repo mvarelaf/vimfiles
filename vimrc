@@ -1,5 +1,7 @@
 ﻿" vim:fdm=marker
 
+let g:machine = hostname()
+
 if &compatible
   set nocompatible
 endif
@@ -210,8 +212,12 @@ let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 1000 " 1 segundo
 
 fun! MU()
-  return get(g:mucomplete#msg#short_methods,
-      \      get(g:, 'mucomplete_current_method', ''), '')
+  if exists("g:loaded_mucomplete")
+    return get(g:mucomplete#msg#short_methods,
+        \      get(g:, 'mucomplete_current_method', ''), '')
+    else
+      return ''
+    endif
 endf
 """ }}}
 
@@ -235,14 +241,24 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "set backupdir=~/.vim/backup
 "set directory=~/.vim/backupf
 
+"Adapted from "More Instantly Better Vim", Damian Conway
+" augroup NoSimultaneousEdits
+"     autocmd!
+"     autocmd SwapExists * let v:swapchoice = 'o'
+"     autocmd SwapExists * echohl ErrorMsg
+"     autocmd SwapExists * echo 'Duplicate edit session (READONLY)'
+"     autocmd SwapExists * echohl None
+"     autocmd SwapExists * sleep 2
+" augroup END
+
 "" AUTOCMD {{{
 if has('autocmd')
   augroup fileTypes
   autocmd!
   autocmd BufReadPost todo.txt setlocal filetype=todo tabstop=2 shiftwidth=2
   autocmd BufReadPost done.txt setlocal filetype=todo tabstop=2 shiftwidth=2
+  autocmd FileType vim setlocal tabstop=2 shiftwidth=2 textwidth=79
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
-  autocmd FileType vim setlocal tabstop=2 shiftwidth=2
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
   " Some file types use real tabs
@@ -285,9 +301,13 @@ let html_use_css = 1 "Use CSS instead of <br> and a lot of &nbsp;
 
 "" Taglist.vim http://vim-taglist.sourceforge.net {{{
 "Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com)
+"alternative https://github.com/mtth/taglist.vim/
 "let g:Tlist_Use_Right_Window=1
 "let g:Tlist_WinWidth=25
 let g:Tlist_Show_Menu=1
+if g:machine == 'CAPRICA'
+  let Tlist_Ctags_Cmd='C:\Users\Usuario\AppData\Local\utils\ctags58\ctags.exe'
+endif
 nnoremap <F12> :TlistToggle<CR>
 "let tlist_vimwiki_settings = 'wiki;h:Headers'
 "" }}}
@@ -300,10 +320,13 @@ let g:calendar_number_of_months = 6
 "" }}}
 
 "" STARTIFY https://github.com/mhinz/vim-startify {{{
-let g:startify_custom_header = []
-
 let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
-let g:startify_bookmarks = [ expand("$USERPROFILE").'\Desktop\INFOP.txt' ]
+
+if g:machine =~ 'E3000*'
+  let g:startify_custom_header = []
+  let g:startify_bookmarks = [ expand("$USERPROFILE").'\Desktop\INFOP.txt' ]
+endif
+
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   MRU']            },
@@ -355,18 +378,20 @@ let g:todo_state_colors= {
 ""}}}
 
 "VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
-let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
-let g:wikidocs0 = wikidocs.'\work\'
-let g:wikidocs0_templates = wikidocs.'\work\templates\'
-let g:wikidocs1 = wikidocs.'\vimwiki\'
-let g:wikidocs2 = wikidocs.'\notas\'
-let g:vimwiki_list = [{'path': wikidocs0,'index': 'work', 'nested_syntaxes': {'python': 'python', 'c++': 'cpp', 'sql': 'sql'},
+if g:machine =~ 'E3000*'
+  let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
+  let g:wikidocs0 = wikidocs.'\work\'
+  let g:wikidocs0_templates = wikidocs.'\work\templates\'
+  let g:wikidocs1 = wikidocs.'\vimwiki\'
+  let g:wikidocs2 = wikidocs.'\notas\'
+  let g:vimwiki_list = [{'path': wikidocs0,'index': 'work', 'nested_syntaxes': {'python': 'python', 'c++': 'cpp', 'sql': 'sql'},
           \ 'template_path': wikidocs0_templates,
           \ 'template_default': 'def_template',
           \ 'template_ext': '.html',
           \ 'auto_toc': 1},
-\ {'path': wikidocs1},
-\ {'path': wikidocs2,'index': 'mis_notas'}]
+     \ {'path': wikidocs1},
+     \ {'path': wikidocs2,'index': 'mis_notas'}]
+endif
 
 "let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
 let g:vimwiki_use_mouse = 1
