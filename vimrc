@@ -258,6 +258,8 @@ if has('autocmd')
   autocmd BufReadPost todo.txt setlocal filetype=todo tabstop=2 shiftwidth=2
   autocmd BufReadPost done.txt setlocal filetype=todo tabstop=2 shiftwidth=2
   autocmd FileType vim setlocal tabstop=2 shiftwidth=2 textwidth=79
+  autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
+  autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
