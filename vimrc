@@ -99,10 +99,10 @@ endif
 set wildmode=list:longest,full
 
 if has('wildignore')
-  set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*~
+  set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*~,*.tmp
   set wildignore+=.git,.hg,.svn
   set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-  " set wig+=*.aux,*.out,*.toc             " LaTeX intermediate files
+  set wildignore+=*.aux,*.out,*.toc        " LaTeX intermediate files
   " set wig+=.DS_Store                     " Mac
   " set wig+=*~,*.swp,*.tmp                " tmp and backup files
 endif
