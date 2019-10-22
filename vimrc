@@ -172,8 +172,9 @@ if !&diff
   packadd! editexisting
 endif
 
-" COPIED FROM
-" https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+let g:netrw_gx = '<cfile>:p' "expand full path
+
+"" COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim {{{
 if has('autocmd')
   filetype plugin indent on
 endif
@@ -204,11 +205,10 @@ endif
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
-" END OF COPIED FROM
-" https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+"" END OF COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
 "" }}}
 
-colorscheme darkblue
+colorscheme ron "darkblue
 
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
 set shortmess+=c    " Shut off completion messages
