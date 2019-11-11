@@ -89,6 +89,7 @@ set showmatch "show matching matchpair after completion
 
 set virtualedit=block
 
+set cmdheight=2
 set laststatus=2
 set ruler       " show the cursor position all the time
 
@@ -172,7 +173,10 @@ if !&diff
   packadd! editexisting
 endif
 
-let g:netrw_gx = '<cfile>:p' "expand full path
+let g:netrw_gx='<cfile>:p' "expand full path
+"Lo arreglamos creando curl.cmd en PortableGit\cmd
+"https://gist.github.com/gmarik/912993
+"let g:netrw_http_cmd='C:\Windows\System32\curl.exe -o'
 
 "" COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim {{{
 if has('autocmd')
@@ -233,6 +237,9 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
 "         \\%m%r%w%y%=\%{MU()}\ %k\ %=\ %{FugitiveStatusline()}\ %l/%L,%v\ %p%%
 
+
+"https://github.com/mopp/dotfiles/blob/master/.vimrc
+"set statusline=%<%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}%=%l/%L,%c%V%8P
 
 "set browsedir=buffer "¿¿?? and omit autochdir
 
