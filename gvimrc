@@ -1,6 +1,6 @@
-set vb t_vb=
-set novisualbell
-set noerrorbells
+"set vb t_vb=
+"set novisualbell
+"set noerrorbells
 
 colorscheme earendel_old
 set background=light

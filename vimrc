@@ -36,6 +36,8 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-commentary')
   call packager#add('tpope/vim-dispatch')
   call packager#add('tpope/vim-fugitive')
+  call packager#add('vim-airline/vim-airline')
+  call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
   call packager#add('vimwiki/vimwiki')
   "call packager#add('')
@@ -61,7 +63,7 @@ augroup END
 """ }}}
 
 "" My SANE defaults {{{
-set history=1000 
+set history=1000
 set tabpagemax=30
 set showcmd
 set hidden
@@ -141,7 +143,7 @@ endif
 " external tool when using grep
 if executable('pt')
   set grepprg=pt
-endif 
+endif
 
 set lazyredraw
 
@@ -212,7 +214,7 @@ endif
 "" END OF COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
 "" }}}
 
-colorscheme ron "darkblue
+"colorscheme ron "darkblue
 
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
 set shortmess+=c    " Shut off completion messages
@@ -229,6 +231,50 @@ fun! MU()
 endf
 """ }}}
 
+" AIRLINE {{{
+let g:airline#extensions#csv#column_display = 'Name'
+
+if has('gui')
+  let g:airline_theme='sol' "'simple' 'light' 'papercolor' 'base16'
+else
+  let g:airline_theme='base16'
+endif
+
+"let g:airline_powerline_fonts = 1
+"let g:airline_symbols_ascii = 1
+
+if has('windows')
+  let g:airline#parts#ffenc#skip_expected_string='utf-8[dos]'
+elseif has('linux')
+  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+endif
+
+let g:airline#extensions#default#section_truncate_width = {}
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline_section_z = '%l/%L,%v %p%%'
+
+let g:airline_mode_map = {
+    \ '__'     : '-',
+    \ 'c'      : 'C',
+    \ 'i'      : 'I',
+    \ 'ic'     : 'I',
+    \ 'ix'     : 'I',
+    \ 'n'      : 'N',
+    \ 'multi'  : 'M',
+    \ 'ni'     : 'N',
+    \ 'no'     : 'N',
+    \ 'R'      : 'R',
+    \ 'Rv'     : 'R',
+    \ 's'      : 'S',
+    \ 'S'      : 'S',
+    \ ''     : 'S',
+    \ 't'      : 'T',
+    \ 'v'      : 'V',
+    \ 'V'      : 'V',
+    \ ''     : 'V',
+    \ }
+" }}}
+
 set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
         \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
@@ -240,6 +286,8 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 
 "https://github.com/mopp/dotfiles/blob/master/.vimrc
 "set statusline=%<%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}%=%l/%L,%c%V%8P
+
+nnoremap <silent> <S-F1> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 "set browsedir=buffer "¿¿?? and omit autochdir
 
@@ -410,7 +458,7 @@ endif
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_auto_checkbox = 0
 " Fold options are now global, not per g:vimwiki_list
-"let g:vimwiki_folding = 'expr' 
+"let g:vimwiki_folding = 'expr'
 let g:vimwiki_hl_cb_checked = 1 " Highlight [X] as comments
 let g:vimwiki_list_ignore_newline = 0 "Do make multiline lists
 "removed in 2.0
