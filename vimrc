@@ -153,7 +153,9 @@ set lazyredraw
 set noerrorbells
 set visualbell t_vb=
 set novisualbell
-set belloff=all
+if exists('&belloff')
+  set belloff=all
+endif
 
 set number
 
@@ -217,8 +219,6 @@ endif
 "" END OF COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
 "" }}}
 
-"colorscheme ron "darkblue
-
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
 set shortmess+=c    " Shut off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
@@ -241,10 +241,8 @@ if has('gui')
   let g:airline_theme='sol' "'simple' 'light' 'papercolor' 'base16'
 else
   let g:airline_theme='base16'
+  let g:airline_symbols_ascii = 1
 endif
-
-"let g:airline_powerline_fonts = 1
-"let g:airline_symbols_ascii = 1
 
 if has('windows')
   let g:airline#parts#ffenc#skip_expected_string='utf-8[dos]'
@@ -316,17 +314,6 @@ endfunction
 " Remove trailing whitespace
 nnoremap <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 " nnoremap <silent> <S-F1> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-
-"set browsedir=buffer "¿¿?? and omit autochdir
-
-" You've also got the terminfo or termcap
-
-" auto-reload vimrc
-"autocmd! bufwritepost _vimrc source $VIM/_vimrc
-"autocmd! bufwritepost gvimrc source ~/.vim/gvimrc
-
-"set backupdir=~/.vim/backup
-"set directory=~/.vim/backupf
 
 "Adapted from "More Instantly Better Vim", Damian Conway
 " augroup NoSimultaneousEdits
