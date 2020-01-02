@@ -39,12 +39,16 @@ function! PackagerInit() abort
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
+  "call packager#add('lervag/wiki.vim')
+  "call packager#add('lervag/wiki-ft.vim')
+  "call packager#add('brtastic/vorg')
+  call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
   "Loaded only for specific filetypes on demand. Requires autocommands below.
-  call packager#add('SidOfc/mkdx', { 'type': 'opt' })
+  "call packager#add('SidOfc/mkdx', { 'type': 'opt' })
   call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
 endfunction
 
@@ -56,7 +60,7 @@ command! PackagerStatus call PackagerInit() | call packager#status()
 "Load plugins only for specific filetype
 augroup packager_filetype
   autocmd!
-  autocmd FileType markdown packadd mkdx
+  "autocmd FileType markdown packadd mkdx
   autocmd FileType csv packadd csv.vim
 augroup END
 
@@ -107,7 +111,6 @@ if has('wildignore')
   set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
   set wildignore+=*.aux,*.out,*.toc        " LaTeX intermediate files
   " set wig+=.DS_Store                     " Mac
-  " set wig+=*~,*.swp,*.tmp                " tmp and backup files
 endif
 
 set nojoinspaces " Use only 1 space after "." when joining lines, not 2
@@ -130,7 +133,7 @@ if v:version > 704 || (v:version == 704 && has('patch401'))
 endif
 
 " ignore whitespace in diff mode
-set diffopt+=iwhite
+set diffopt+=iwhite,vertical
 
 if has('linebreak')
   set linebreak
@@ -283,11 +286,36 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
 "         \\%m%r%w%y%=\%{MU()}\ %k\ %=\ %{FugitiveStatusline()}\ %l/%L,%v\ %p%%
 
-
 "https://github.com/mopp/dotfiles/blob/master/.vimrc
 "set statusline=%<%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}%=%l/%L,%c%V%8P
 
-nnoremap <silent> <S-F1> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+"https://vimways.org/2018/formatting-lists-with-vim/
+if v:version > 703 || v:version == 703 && has('patch541')
+  set formatoptions+=n " When formatting text, recognize numbered lists
+  set formatlistpat=^\\s*                     " Optional leading whitespace
+  set formatlistpat+=[                        " Start character class
+  set formatlistpat+=\\[({]\\?                " |  Optionally match opening punctuation
+  set formatlistpat+=\\(                      " |  Start group
+  set formatlistpat+=[0-9]\\+                 " |  |  Numbers
+  set formatlistpat+=\\\|                     " |  |  or
+  set formatlistpat+=[a-zA-Z]\\+              " |  |  Letters
+  set formatlistpat+=\\)                      " |  End group
+  set formatlistpat+=[\\]:.)}                 " |  Closing punctuation
+  set formatlistpat+=]                        " End character class
+  set formatlistpat+=\\s\\+                   " One or more spaces
+  set formatlistpat+=\\\|                     " or
+  set formatlistpat+=^\\s*[-–+o*•]\\s\\+      " Bullet points
+endif
+
+function! Preserve(command)
+  let l:saved_winview = winsaveview()
+  execute a:command
+  call winrestview(l:saved_winview)
+endfunction
+
+" Remove trailing whitespace
+nnoremap <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
+" nnoremap <silent> <S-F1> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 "set browsedir=buffer "¿¿?? and omit autochdir
 
@@ -348,6 +376,14 @@ if has('autocmd')
 endif
 "" }}}
 
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(':DiffOrig')
+  command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+              \ | wincmd p | diffthis
+endif
+
 "" Abbreviations {{{
 iab _hoy <C-R>=strftime("%d.%m.%Y")<CR>
 iab _time <C-R>=strftime("%H:%M:%S")<CR>
@@ -402,8 +438,9 @@ nnoremap <leader>q :Sayonara!<cr>
 "" }}}
 
 "" MKDX https://github.com/SidOfc/mkdx {{{
-let g:mkdx#settings = { 'enter': { 'shift': 1 } }
-let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
+"let g:mkdx#settings = { 'enter': { 'shift': 1 } }
+"let g:mkdx#settings = { 'highlight': { 'enable': 1 } }
+"let g:mkdx#settings = { 'map': { 'prefix': ',' } }
 "" }}}
 
 "" SANDWICH https://github.com/machakann/vim-sandwich {{{
@@ -438,7 +475,22 @@ let g:todo_state_colors= {
     \'SOMEDAY': 'Grey'}
 ""}}}
 
-"VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
+"" YOINK https://github.com/svermeulen/vim-yoink {{{
+nmap <c-n> <plug>(YoinkPostPasteSwapBack)
+nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+
+nmap y <plug>(YoinkYankPreserveCursorPosition)
+xmap y <plug>(YoinkYankPreserveCursorPosition)
+""}}}
+
+"let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
+"let g:wikidocs0 = wikidocs.'\vimwiki\'
+"let g:wiki_root = g:wikidocs0
+
+"" VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
 if g:machine =~ 'E3000*'
   let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
   let g:wikidocs0 = wikidocs.'\work\'
@@ -475,6 +527,6 @@ nmap <C-F3> :Vimwiki2HTML<CR>
 imap <C-F3> <Esc><C-F3>
 nmap <C-S-F3> :VimwikiAll2HTML<CR>
 imap <C-S-F3> <Esc><C-S-F3>
-" }}}
+"" }}}
 
 runtime! mywin.vim

@@ -10,7 +10,7 @@ set guicursor=n:blinkon0  " No blinking cursor, only in normal mode
 
 set guioptions-=T         " get rid of GUI buttons
 set guioptions-=r         " get rid of right scroll
-set guioptions-=L         " get rid of left scroll when verticall split
+set guioptions-=L         " get rid of left scroll when vertical split
 
 set guifont=Consolas:h10
 
