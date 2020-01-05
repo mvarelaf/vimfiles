@@ -292,9 +292,6 @@ set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
 "         \\%m%r%w%y%=\%{MU()}\ %k\ %=\ %{FugitiveStatusline()}\ %l/%L,%v\ %p%%
 
-"https://github.com/mopp/dotfiles/blob/master/.vimrc
-"set statusline=%<%F\ %m%r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}%=%l/%L,%c%V%8P
-
 "https://vimways.org/2018/formatting-lists-with-vim/
 if v:version > 703 || v:version == 703 && has('patch541')
   set formatoptions+=n " When formatting text, recognize numbered lists
@@ -333,12 +330,12 @@ nnoremap <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 "     autocmd SwapExists * sleep 2
 " augroup END
 
-if has('autocmd')
-  augroup align_windows
-    autocmd!
-    autocmd VimResized * wincmd =
-  augroup END
-endif
+"if has('autocmd')
+"  augroup align_windows
+"    autocmd!
+"    autocmd VimResized * wincmd =
+"  augroup END
+"endif
 
 "" AUTOCMD {{{
 if has('autocmd')
