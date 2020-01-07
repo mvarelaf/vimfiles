@@ -225,7 +225,7 @@ endif
 nnoremap <leader>ew :e <C-R>=expand("%:.:h") . "/"<CR>
 " 'cd' towards the directory in which the current file is edited
 " but only change the path for the current window
-nnoremap <leader>cd :lcd %:h<CR>
+nnoremap <leader>lcd :lcd %:h<CR>
 
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
 set shortmess+=c    " Shut off completion messages
@@ -529,6 +529,8 @@ imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
 runtime! mywin.vim
+
+colorscheme desert
 
 " Use the internal diff if available.
 " Otherwise use the special 'diffexpr' for Windows.
