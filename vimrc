@@ -30,7 +30,8 @@ function! PackagerInit() abort
   call packager#add('dhruvasagar/vim-table-mode')
   call packager#add('machakann/vim-sandwich')
   call packager#add('lifepillar/vim-mucomplete')
-  call packager#add('tpope/vim-vinegar')
+  "call packager#add('tpope/vim-vinegar')
+  call packager#add('wincent/ferret')
   call packager#add('tpope/vim-repeat')
   call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
@@ -50,6 +51,7 @@ function! PackagerInit() abort
   "Loaded only for specific filetypes on demand. Requires autocommands below.
   "call packager#add('SidOfc/mkdx', { 'type': 'opt' })
   call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
+  call packager#add('plasticboy/vim-markdown', { 'type': 'opt' })
 endfunction
 
 command! PackagerInstall call PackagerInit() | call packager#install()
@@ -61,6 +63,7 @@ command! PackagerStatus call PackagerInit() | call packager#status()
 augroup packager_filetype
   autocmd!
   "autocmd FileType markdown packadd mkdx
+  autocmd FileType markdown packadd vim-markdown
   autocmd FileType csv packadd csv.vim
 augroup END
 
@@ -483,6 +486,12 @@ nmap P <plug>(YoinkPaste_P)
 
 nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
+""}}}
+
+"" VIM-MARKDOWN {{{
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_strikethrough = 1
 ""}}}
 
 "let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
