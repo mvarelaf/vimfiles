@@ -28,18 +28,21 @@ function! PackagerInit() abort
   call packager#add('mhinz/vim-sayonara')
   call packager#add('godlygeek/tabular')
   call packager#add('dhruvasagar/vim-table-mode')
+  " call packager#add('tpope/vim-surround')
   call packager#add('machakann/vim-sandwich')
   call packager#add('lifepillar/vim-mucomplete')
   "call packager#add('tpope/vim-vinegar')
-  call packager#add('wincent/ferret')
+  "call packager#add('wincent/ferret')
   call packager#add('tpope/vim-repeat')
   call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
   call packager#add('tpope/vim-dispatch')
   call packager#add('tpope/vim-fugitive')
+  "itchyny/lightline.vim and set noshowmode
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
+  call packager#add('majutsushi/tagbar')
   "call packager#add('lervag/wiki.vim')
   "call packager#add('lervag/wiki-ft.vim')
   "call packager#add('brtastic/vorg')
@@ -97,7 +100,7 @@ set showmatch "show matching matchpair after completion
 
 set virtualedit=block
 
-set cmdheight=2
+" set cmdheight=2 "default 1
 set laststatus=2
 set ruler       " show the cursor position all the time
 
@@ -136,6 +139,7 @@ endif
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite,vertical
+set diffopt+=algorithm:minimal "myers "default algorithm
 
 if has('linebreak')
   set linebreak
@@ -146,9 +150,14 @@ if has('linebreak')
 endif
 
 " external tool when using grep
-if executable('pt')
-  set grepprg=pt
-endif
+" if executable('pt')
+"   set grepprg=pt
+" endif
+" if executable('rg')
+"   set grepprg=rg\ --vimgrep\ --no-heading
+"         \\ --no-config\ --max-columns\ 4096\ --crlf
+"   set grepformat=%f:%l:%m
+" endif
 
 set lazyredraw
 
@@ -160,6 +169,7 @@ if exists('&belloff')
 endif
 
 set number
+set relativenumber
 
 " Show @@@ in the last line if it is truncated.
 if v:version > 704
@@ -182,8 +192,13 @@ if !&diff
   packadd! editexisting
 endif
 
-let g:netrw_gx='<cfile>:p' "expand full path
+" if !exists('*EditExisting')  && findfile('plugin/editexisting.vim', &rtp) ==# ''
+"   runtime! macros/editexisting.vim
+" endif
 
+let g:netrw_gx='<cfile>:p' "expand full path
+let g:netrw_liststyle = 3 " show subfolders as ascii tree
+"
 "Lo arreglamos creando curl.cmd en PortableGit\cmd
 "https://gist.github.com/gmarik/912993
 "let g:netrw_http_cmd='C:\Windows\System32\curl.exe -o'
@@ -246,6 +261,8 @@ endf
 """ }}}
 
 " AIRLINE {{{
+set noshowmode
+
 let g:airline#extensions#csv#column_display = 'Name'
 
 if has('gui')
@@ -303,8 +320,8 @@ if v:version > 703 || v:version == 703 && has('patch541')
   set formatlistpat+=\\[({]\\?                " |  Optionally match opening punctuation
   set formatlistpat+=\\(                      " |  Start group
   set formatlistpat+=[0-9]\\+                 " |  |  Numbers
-  set formatlistpat+=\\\|                     " |  |  or
-  set formatlistpat+=[a-zA-Z]\\+              " |  |  Letters
+  "set formatlistpat+=\\\|                     " |  |  or
+  "set formatlistpat+=[a-zA-Z]\\+              " |  |  Letters
   set formatlistpat+=\\)                      " |  End group
   set formatlistpat+=[\\]:.)}                 " |  Closing punctuation
   set formatlistpat+=]                        " End character class
@@ -339,6 +356,9 @@ nnoremap <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 "    autocmd VimResized * wincmd =
 "  augroup END
 "endif
+
+set pythonthreedll=$USERPROFILE\AppData\Local\Continuum\miniconda3\python37.dll
+set pythonthreehome=$USERPROFILE\AppData\Local\Continuum\miniconda3\
 
 "" AUTOCMD {{{
 if has('autocmd')
@@ -386,6 +406,13 @@ if !exists(':DiffOrig')
               \ | wincmd p | diffthis
 endif
 
+" if has('langmap') && exists('+langremap')
+"   " Prevent that the langmap option applies to characters that result from a
+"   " mapping.  If set (default), this may break plugins (but it's backward
+"   " compatible).
+"   set nolangremap
+" endif
+
 "" Abbreviations {{{
 iab _hoy <C-R>=strftime("%d.%m.%Y")<CR>
 iab _time <C-R>=strftime("%H:%M:%S")<CR>
@@ -398,16 +425,42 @@ iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR>
 let html_use_css = 1 "Use CSS instead of <br> and a lot of &nbsp;
 "" }}}
 
+"" Tagbar https://github.com/majutsushi/tagbar {{{
+nmap <F12> :TagbarToggle<CR>
+let g:tagbar_type_vimwiki = {
+    \ 'ctagstype' : 'wiki',
+    \ 'kinds' : [
+        \ 'h:header_l1',
+        \ 'i:header_l2',
+        \ 'j:header_l3',
+        \ 'k:header_l4',
+        \ 'l:header_l5',
+        \ 'm:header_l6'
+    \ ],
+    \ 'sort': 0
+\ }
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+"" }}}
+
 "" Taglist.vim http://vim-taglist.sourceforge.net {{{
 "Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com)
 "alternative https://github.com/mtth/taglist.vim/
 "let g:Tlist_Use_Right_Window=1
 "let g:Tlist_WinWidth=25
-let g:Tlist_Show_Menu=1
-if g:machine == 'CAPRICA'
-  let Tlist_Ctags_Cmd='C:\Users\Usuario\AppData\Local\utils\ctags58\ctags.exe'
-endif
-nnoremap <F12> :TlistToggle<CR>
+"let g:Tlist_Show_Menu=1
+"if g:machine == 'CAPRICA'
+"  let Tlist_Ctags_Cmd='C:\Users\Usuario\AppData\Local\utils\ctags58\ctags.exe'
+"elseif g:machine =~ 'E3000*'
+"  let Tlist_Ctags_Cmd='C:\Users\mvfr\AppData\Local\utils\ctags.exe'
+"endif
+"nnoremap <F12> :TlistToggle<CR>
 "let tlist_vimwiki_settings = 'wiki;h:Headers'
 "" }}}
 
@@ -488,10 +541,20 @@ nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
 ""}}}
 
+"" FERRET https://github.com/wincent/ferret {{{
+"let g:FerretFormat = "%f:%l:%m"
+""}}}
+
 "" VIM-MARKDOWN {{{
+" let g:vim_markdown_folding_style_pythonic = 1
+" let g:vim_markdown_override_foldtext = 0
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_no_extensions_in_markdown = 1
+let g:vim_markdown_auto_insert_bullets = 0
+let g:vim_markdown_new_list_item_indent = 0
 ""}}}
 
 "let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
@@ -538,8 +601,6 @@ imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
 runtime! mywin.vim
-
-colorscheme desert
 
 " Use the internal diff if available.
 " Otherwise use the special 'diffexpr' for Windows.
