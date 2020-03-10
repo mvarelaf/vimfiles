@@ -168,8 +168,13 @@ if exists('&belloff')
   set belloff=all
 endif
 
-set number
+" set number
 set relativenumber
+if has('linebreak')
+  set numberwidth=2
+endif
+
+set nrformats="bin,hex,alpha"
 
 " Show @@@ in the last line if it is truncated.
 if v:version > 704
@@ -393,6 +398,13 @@ if has('autocmd')
 
   " The following autocommand will cause the quickfix window to open after any grep invocation:
   autocmd QuickFixCmdPost *grep* cwindow
+  augroup END
+
+  "https://github.com/nirrub/dotfiles/blob/master/init.vim
+  augroup cline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
   augroup END
 
 endif
