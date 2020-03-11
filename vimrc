@@ -100,15 +100,20 @@ set showmatch "show matching matchpair after completion
 
 set virtualedit=block
 
-" set cmdheight=2 "default 1
+"set cmdheight=2 "default 1
 set laststatus=2
 set ruler       " show the cursor position all the time
+
+set shortmess+=r    " use "[RO]" instead of "[readonly]"
+set shortmess+=m    " use "[+]" instead of "[Modified]"
+set shortmess-=S    " show search count message when searching, e.g. [1/5]"
 
 if has('wildmenu')
   set wildmenu
 endif
 
-set wildmode=list:longest,full
+" set wildmode=list:longest,full
+set wildmode=longest,full
 
 if has('wildignore')
   set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*~,*.tmp
@@ -168,13 +173,13 @@ if exists('&belloff')
   set belloff=all
 endif
 
-" set number
+set number
 set relativenumber
-if has('linebreak')
-  set numberwidth=2
-endif
+"if has('linebreak')
+"  set numberwidth=2
+"endif
 
-set nrformats="bin,hex,alpha"
+"set nrformats=bin,hex,alpha
 
 " Show @@@ in the last line if it is truncated.
 if v:version > 704
@@ -488,7 +493,14 @@ let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
 
 if g:machine =~ 'E3000*'
   let g:startify_custom_header = []
-  let g:startify_bookmarks = [ expand("$USERPROFILE").'\Desktop\INFOP.txt' ]
+  let g:startify_bookmarks = [
+        \ {'p': expand("$USERPROFILE").'\Desktop\INFOP.txt' },
+        \ {'c': expand("$USERPROFILE").'\vimfiles\vimrc' }
+        \ ]
+else
+  let g:startify_bookmarks = [
+        \ {'c': expand("$USERPROFILE").'\vimfiles\vimrc' }
+        \ ]
 endif
 
 let g:startify_lists = [
