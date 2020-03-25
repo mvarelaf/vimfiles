@@ -14,6 +14,13 @@ if has('multi_byte')
   setglobal fileencoding=utf-8   " change default file encoding when writing new files
 endif
 
+" Do not load some standard plugins
+let g:loaded_getscriptPlugin = 1 " getscriptPlugin.vim
+let g:loaded_vimballPlugin = 1   " vimballPlugin.vim
+let loaded_gzip = 1              " gzip.vim
+let g:loaded_zipPlugin = 1       " zipPlugin.vim
+let g:loaded_tarPlugin = 1       " tarPlugin.vim
+
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
 
@@ -186,6 +193,8 @@ endif
 set splitright
 set splitbelow
 
+set noequalalways
+
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
@@ -243,6 +252,7 @@ endif
 
 let g:netrw_gx='<cfile>:p' "expand full path
 let g:netrw_liststyle = 3 " show subfolders as ascii tree
+
 "" }}}
 
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
@@ -304,6 +314,8 @@ let g:calendar_number_of_months = 6
 "" }}}
 
 "" STARTIFY https://github.com/mhinz/vim-startify {{{
+let g:startify_change_to_vcs_root = 1
+
 let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
 
 if g:machine =~ 'E3000*'
@@ -399,7 +411,7 @@ endif
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_auto_checkbox = 0
 " Fold options are now global, not per g:vimwiki_list
-"let g:vimwiki_folding = 'expr'
+let g:vimwiki_folding = 'expr' " folds sections and code blocks
 let g:vimwiki_hl_cb_checked = 1 " Highlight [X] as comments
 let g:vimwiki_list_ignore_newline = 0 "Do make multiline lists
 let g:vimwiki_global_ext = 0 " No wikify by .ext outside defined directories
@@ -424,11 +436,8 @@ command! -nargs=1 -range TabFirst exec <line1> . ',' . <line2> . 'Tabularize /^[
 let g:slime_target = "vimterminal"
 "" }}}
 
-
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 set noshowmode
-
-let g:airline#extensions#csv#column_display = 'Name'
 
 if has('gui')
   let g:airline_theme='solarized'
@@ -443,6 +452,10 @@ if has('windows')
 elseif has('linux')
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 endif
+
+let g:airline#extensions#csv#column_display = 'Name'
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#branch#vcs_checks = ['untracked']
 
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#wordcount#enabled = 0

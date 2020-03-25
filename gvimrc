@@ -16,6 +16,11 @@ set guioptions-=r         " get rid of right scroll
 set guioptions-=L         " get rid of left scroll when vertical split
 
 set guifont=Consolas:h10
+" https://github.com/tomasiser/vim-code-dark
+if has('directx') && has('windows')
+  set renderoptions=type:directx
+  "set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
+endif
 
 " winpos 1177 0   "right with Consolas:h10 with number and 21'' screen
 winpos 1127 0   "right with Consolas:h10 with number and 13.3'' screen

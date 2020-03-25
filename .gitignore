@@ -1,0 +1,6 @@
+##Ignored particular files and folders
+startify-sessions/
+.netrwhist
+
+## Vim swap files
+*.swp
