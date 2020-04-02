@@ -15,11 +15,13 @@ if has('multi_byte')
 endif
 
 " Do not load some standard plugins
-let g:loaded_getscriptPlugin = 1 " getscriptPlugin.vim
-let g:loaded_vimballPlugin = 1   " vimballPlugin.vim
-let loaded_gzip = 1              " gzip.vim
-let g:loaded_zipPlugin = 1       " zipPlugin.vim
-let g:loaded_tarPlugin = 1       " tarPlugin.vim
+let g:loaded_getscriptPlugin = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_logiPat = 1
+let g:loaded_rrhelper = 1
+let loaded_gzip = 1
+let g:loaded_zipPlugin = 1
+let g:loaded_tarPlugin = 1
 
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
@@ -50,6 +52,7 @@ function! PackagerInit() abort
   call packager#add('sk1418/QFGrep')
   call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
+  call packager#add('flazz/vim-colorschemes')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -429,7 +432,9 @@ imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
 "" TABULAR  https://github.com/godlygeek/tabular {{{
-command! -nargs=1 -range TabFirst exec <line1> . ',' . <line2> . 'Tabularize /^[^' . escape(<q-args>, '\^$.[?*~') . ']*\zs' . escape(<q-args>, '\^$.[?*~')
+if exists(':Tabularize') == 2
+  command! -nargs=1 -range TabFirst exec <line1> . ',' . <line2> . 'Tabularize /^[^' . escape(<q-args>, '\^$.[?*~') . ']*\zs' . escape(<q-args>, '\^$.[?*~')
+endif
 "" }}}
 
 "" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
@@ -440,8 +445,7 @@ let g:slime_target = "vimterminal"
 set noshowmode
 
 if has('gui')
-  let g:airline_theme='solarized'
-  "let g:airline_theme='sol'
+  let g:airline_theme='hybrid'
 else
   let g:airline_theme='base16'
   let g:airline_symbols_ascii = 1

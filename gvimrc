@@ -1,11 +1,14 @@
 " Adapted from https://www.vim.org/scripts/script.php?script_id=2188
-colorscheme earendel_old
+" colorscheme earendel_old
 
-if g:machine == 'CAPRICA'
-  set background=dark
-else
-  set background=light
-endif
+colorscheme hybrid
+set background=dark
+
+" if g:machine == 'CAPRICA'
+"   set background=dark
+" else
+"   set background=light
+" endif
 
 " set guicursor=a:blinkon0  " No blinking cursor in all modes
 " set guicursor=n:blinkon0  " No blinking cursor, only in normal mode
