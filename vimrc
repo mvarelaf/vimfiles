@@ -22,6 +22,8 @@ let g:loaded_rrhelper = 1
 let loaded_gzip = 1
 let g:loaded_zipPlugin = 1
 let g:loaded_tarPlugin = 1
+" let g:loaded_spellfile_plugin = 1
+" let g:loaded_2html_plugin = 1
 
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
@@ -52,7 +54,9 @@ function! PackagerInit() abort
   call packager#add('sk1418/QFGrep')
   call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
+  call packager#add('dense-analysis/ale')
   call packager#add('flazz/vim-colorschemes')
+  call packager#add('ryanoasis/vim-devicons')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -361,7 +365,18 @@ nmap d<C-X>     <Plug>SpeedDatingNowLocal
 "" }}}
 
 "" VIMTODO https://github.com/mivok/vimtodo {{{
-let g:todo_state_colors= {
+if &background == 'dark'
+  let g:todo_state_colors= {
+    \'DONE': 'Green',
+    \'CLOSED': 'Grey',
+    \'CANCELLED': 'Red',
+    \'TODO': 'Yellow',
+    \'WAITING': 'Brown',
+    \'HOLD': 'Grey',
+    \'INPROGRESS': 'Cyan',
+    \'SOMEDAY': 'Grey'}
+else
+  let g:todo_state_colors= {
     \'DONE': 'Green',
     \'CLOSED': 'Grey',
     \'CANCELLED': 'Red',
@@ -370,6 +385,7 @@ let g:todo_state_colors= {
     \'HOLD': 'Grey',
     \'INPROGRESS': 'Cyan',
     \'SOMEDAY': 'Grey'}
+endif
 ""}}}
 
 "" YOINK https://github.com/svermeulen/vim-yoink {{{
@@ -432,20 +448,30 @@ imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
 "" TABULAR  https://github.com/godlygeek/tabular {{{
-if exists(':Tabularize') == 2
+" if exists(':Tabularize')
   command! -nargs=1 -range TabFirst exec <line1> . ',' . <line2> . 'Tabularize /^[^' . escape(<q-args>, '\^$.[?*~') . ']*\zs' . escape(<q-args>, '\^$.[?*~')
-endif
+" endif
 "" }}}
 
 "" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
 let g:slime_target = "vimterminal"
 "" }}}
 
+"" ALE https://github.com/dense-analysis/ale {{{
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+"" }}}
+
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 set noshowmode
 
+let g:airline_powerline_fonts = 1
+
 if has('gui')
-  let g:airline_theme='hybrid'
+  let g:airline_theme='hybridline'
 else
   let g:airline_theme='base16'
   let g:airline_symbols_ascii = 1
@@ -541,6 +567,7 @@ if has('autocmd')
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
   autocmd BufReadPost *.rkt,*.rktl setlocal filetype=racket tabstop=2 shiftwidth=2
+  autocmd FileType racket setlocal commentstring=;;%s
   " Some file types use real tabs
   autocmd FileType make setlocal noexpandtab
   autocmd FileType gitconfig setlocal noexpandtab

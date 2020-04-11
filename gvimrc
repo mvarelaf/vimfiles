@@ -1,7 +1,7 @@
 " Adapted from https://www.vim.org/scripts/script.php?script_id=2188
 " colorscheme earendel_old
 
-colorscheme hybrid
+colorscheme freya "hybrid
 set background=dark
 
 " if g:machine == 'CAPRICA'
@@ -18,7 +18,9 @@ set guioptions-=T         " get rid of GUI buttons
 set guioptions-=r         " get rid of right scroll
 set guioptions-=L         " get rid of left scroll when vertical split
 
-set guifont=Consolas:h10
+set guifont=SauceCodePro_NF:h9
+" set guifont=Consolas:h10
+
 " https://github.com/tomasiser/vim-code-dark
 if has('directx') && has('windows')
   set renderoptions=type:directx
