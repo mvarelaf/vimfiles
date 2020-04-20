@@ -267,6 +267,9 @@ set shortmess+=c    " Shut off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 1000 " 1 second
 
+" let g:mucomplete#chains = { 'sql' : ['file', 'sqla', 'keyn'] }
+let g:mucomplete#chains = { 'sql' : ['file', 'keyn'] }
+
 function! MU()
   if exists("g:loaded_mucomplete")
     return get(g:mucomplete#msg#short_methods,
@@ -406,7 +409,6 @@ let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_new_list_item_indent = 0
-let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 ""}}}
@@ -468,13 +470,12 @@ let g:ale_open_list = 1
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 set noshowmode
 
-let g:airline_powerline_fonts = 1
-
 if has('gui')
-  let g:airline_theme='hybridline'
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme='hybrid'
 else
-  let g:airline_theme='base16'
-  let g:airline_symbols_ascii = 1
+  let g:airline_theme='base16_vim'
+  " let g:airline_symbols_ascii = 1
 endif
 
 if has('windows')
@@ -554,20 +555,36 @@ nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
 " but only change the path for the current window
 nnoremap <leader>lcd :lcd %:h<CR>
 
+nmap <F7> :Search<Space>
+nmap <S-F7> :ESearch<Space>
+
+func Eatchar(pat)
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+
+"Inspired by https://vim.fandom.com/wiki/Find_in_files_within_Vim
+cabbrev Search
+      \ vimgrep //gj
+      \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
+      \ <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+cabbrev ESearch
+      \ vimgrep /\<lt>\>/gj
+      \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
+      \ <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+
 "" AUTOCMD {{{
 if has('autocmd')
   augroup fileTypes
   autocmd!
-  autocmd BufReadPost todo.txt setlocal filetype=todo tabstop=2 shiftwidth=2
-  autocmd BufReadPost done.txt setlocal filetype=todo tabstop=2 shiftwidth=2
+  autocmd Filetype todo setlocal tabstop=2 shiftwidth=2
   autocmd FileType vim setlocal tabstop=2 shiftwidth=2 textwidth=79
   autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
-  autocmd BufReadPost *.rkt,*.rktl setlocal filetype=racket tabstop=2 shiftwidth=2
-  autocmd FileType racket setlocal commentstring=;;%s
+  autocmd FileType racket setlocal tabstop=2 shiftwidth=2 commentstring=;;%s
   " Some file types use real tabs
   autocmd FileType make setlocal noexpandtab
   autocmd FileType gitconfig setlocal noexpandtab
@@ -591,17 +608,21 @@ if has('autocmd')
   autocmd QuickFixCmdPost *grep* cwindow
   augroup END
 
-  augroup cursor_line
-    autocmd!
-    au WinEnter * set cursorline
-    au WinLeave,InsertEnter * set nocursorline
-    au WinEnter,InsertLeave * set cursorline
-  augroup END
+  if has('gui')
+    augroup cursor_line
+      autocmd!
+      au VimEnter * set cursorline
+      au WinLeave,InsertEnter * set nocursorline
+      au WinEnter,InsertLeave * set cursorline
+    augroup END
+  endif
 
 endif
 "" }}}
 
 runtime! mywin.vim
+
+colorscheme base
 
 if g:machine =~ 'E3000*'
   set pythonthreedll=$USERPROFILE\AppData\Local\Continuum\miniconda3\python37.dll

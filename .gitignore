@@ -1,4 +1,5 @@
 ##Ignored particular files and folders
+spell/
 startify-sessions/
 .netrwhist
 
