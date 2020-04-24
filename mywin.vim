@@ -1,7 +1,7 @@
 " Set options and add mapping such that Vim behaves a lot like MS-Windows
 "
 " Maintainer:	Miguel Varela
-" Last Change:	martes 12 marzo 2019 19:10
+" Last Change:	sábado 25 abril 2020
 " Adapted from $VIMRUNTIME/mswin.vim
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
 " Last Change:	2018 Dec 07
@@ -27,20 +27,20 @@ set backspace=indent,eol,start whichwrap+=<,>,[,]
 vnoremap <BS> d
 
 if has("clipboard")
-        " CTRL-X and SHIFT-Del are Cut
-        vnoremap <C-X> "+x
-        vnoremap <S-Del> "+x
+  " CTRL-X and SHIFT-Del are Cut
+  vnoremap <C-X> "+x
+  vnoremap <S-Del> "+x
 
-        " CTRL-C and CTRL-Insert are Copy
-        vnoremap <C-C> "+y
-        vnoremap <C-Insert> "+y
+  " CTRL-C and CTRL-Insert are Copy
+  vnoremap <C-C> "+y
+  vnoremap <C-Insert> "+y
 
-        " CTRL-V and SHIFT-Insert are Paste
-        map <C-V>		"+gP
-        map <S-Insert>		"+gP
+  " CTRL-V and SHIFT-Insert are Paste
+  map <C-V>		"+gP
+  map <S-Insert>		"+gP
 
-        cmap <C-V>		<C-R>+
-        cmap <S-Insert>		<C-R>+
+  cmap <C-V>		<C-R>+
+  cmap <S-Insert>		<C-R>+
 endif
 
 " Pasting blockwise and linewise selections is not possible in Insert and
@@ -50,8 +50,8 @@ endif
 " Use CTRL-G u to have CTRL-Z only undo the paste.
 
 if 1
-    exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
-    exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+  exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+  exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
 endif
 
 imap <S-Insert>		<C-V>
@@ -95,6 +95,13 @@ endif
 "snoremap <C-A> <C-C>gggH<C-O>G
 "xnoremap <C-A> <C-C>ggVG
 
+" CTRL-E is Select all
+noremap <C-E> gggH<C-O>G
+inoremap <C-E> <C-O>gg<C-O>gH<C-O>G
+onoremap <C-E> <C-C>gggH<C-O>G
+snoremap <C-E> <C-C>gggH<C-O>G
+xnoremap <C-E> <C-C>ggVG
+
 " CTRL-Tab is Next window
 noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
@@ -107,18 +114,20 @@ inoremap <C-F4> <C-O><C-W>c
 cnoremap <C-F4> <C-C><C-W>c
 onoremap <C-F4> <C-C><C-W>c
 
-"if has("gui")
-"  " CTRL-F is the search dialog
-"  noremap  <expr> <C-F> has("gui_running") ? ":promptfind\<CR>" : "/"
-"  inoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-O>:promptfind\<CR>" : "\<C-\>\<C-O>/"
-"  cnoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-C>:promptfind\<CR>" : "\<C-\>\<C-O>/"
-"
-"  " CTRL-H is the replace dialog,
-"  " but in console, it might be backspace, so don't map it there
-"  nnoremap <expr> <C-H> has("gui_running") ? ":promptrepl\<CR>" : "\<C-H>"
-"  inoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-O>:promptrepl\<CR>" : "\<C-H>"
-"  cnoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-C>:promptrepl\<CR>" : "\<C-H>"
-"endif
+if has("gui")
+  " CTRL-F is the search dialog
+  " noremap  <expr> <C-F> has("gui_running") ? ":promptfind\<CR>" : "/"
+  " inoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-O>:promptfind\<CR>" : "\<C-\>\<C-O>/"
+  " cnoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-C>:promptfind\<CR>" : "\<C-\>\<C-O>/"
+  noremap  <expr> <C-F> "/\\v"
+  inoremap <expr> <C-F> "\<C-\>\<C-O>/\\v"
+
+  " CTRL-H is the replace dialog,
+  " but in console, it might be backspace, so don't map it there
+  " nnoremap <expr> <C-H> has("gui_running") ? ":promptrepl\<CR>" : "\<C-H>"
+  " inoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-O>:promptrepl\<CR>" : "\<C-H>"
+  " cnoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-C>:promptrepl\<CR>" : "\<C-H>"
+endif
 
 " restore 'cpoptions'
 set cpo&

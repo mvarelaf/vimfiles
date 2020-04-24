@@ -1,6 +1,7 @@
 ##Ignored particular files and folders
 spell/
 startify-sessions/
+pack/
 .netrwhist
 
 ## Vim swap files

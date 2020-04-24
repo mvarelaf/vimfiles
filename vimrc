@@ -14,6 +14,9 @@ if has('multi_byte')
   setglobal fileencoding=utf-8   " change default file encoding when writing new files
 endif
 
+let mapleader = ","
+let maplocalleader = ","
+
 " Do not load some standard plugins
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
@@ -37,7 +40,6 @@ function! PackagerInit() abort
   call packager#add('mhinz/vim-startify')
   call packager#add('mhinz/vim-sayonara')
   call packager#add('godlygeek/tabular')
-  call packager#add('dhruvasagar/vim-table-mode')
   call packager#add('lifepillar/vim-mucomplete')
   call packager#add('tpope/vim-surround')
   call packager#add('tpope/vim-repeat')
@@ -51,12 +53,12 @@ function! PackagerInit() abort
   call packager#add('majutsushi/tagbar')
   call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
-  call packager#add('sk1418/QFGrep')
   call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
   call packager#add('dense-analysis/ale')
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
+  call packager#add('justinmk/vim-dirvish')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -167,6 +169,8 @@ set hlsearch
 set ignorecase
 set smartcase
 
+set infercase
+
 set copyindent
 set smartindent
 
@@ -181,6 +185,8 @@ set shortmess+=r    " use "[RO]" instead of "[readonly]"
 set shortmess+=m    " use "[+]" instead of "[Modified]"
 set shortmess-=S    " show search count message when searching, e.g. [1/5]"
 
+set suffixes+=.pyc,.pyo,.egg-info,.class
+
 set wildmode=longest,full
 
 if has('wildignore')
@@ -189,6 +195,22 @@ if has('wildignore')
   set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
   set wildignore+=*.aux,*.out,*.toc        " LaTeX intermediate files
   set wildignore+=.DS_Store                " Mac
+  set wildignore+=*.a,*.pdb,*.lib "stuff to ignore when tab completing
+  set wildignore+=__pycache__,.stversions,*.spl,*.out,%*
+  set wildignore+=*.so,*.dll,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex
+  " set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz
+  set wildignore+=*.ipch,*.gem
+  set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso
+  set wildignore+=*/.Trash/**,*.dmg,*/.rbenv/**
+  set wildignore+=*.wav,*.mp3,*.ogg,*.pcm
+  set wildignore+=*.mht,*.suo,*.sdf,*.jnlp
+  set wildignore+=*.chm,*.epub,*.pdf,*.mobi,*.ttf
+  set wildignore+=*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc
+  set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
+  set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.msu
+  set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
+  set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
+
 endif
 
 set nojoinspaces " Use only 1 space after "." when joining lines, not 2
@@ -350,7 +372,7 @@ let g:startify_lists = [
 "" }}}
 
 "" SAYONARA https://github.com/mhinz/vim-sayonara {{{
-nnoremap <leader>q :Sayonara!<cr>
+nnoremap <silent> <leader>q :Sayonara!<cr>
 "" }}}
 
 "" DISPATCH https://github.com/tpope/vim-dispatch {{{
@@ -400,15 +422,16 @@ nmap P <plug>(YoinkPaste_P)
 
 nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
+
+let g:yoinkAutoFormatPaste = 1
 ""}}}
 
 "" VIM-MARKDOWN {{{
 " let g:vim_markdown_folding_style_pythonic = 1
-" let g:vim_markdown_override_foldtext = 0
+" let g:vim_markdown_override_foldtext = 1
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_new_list_item_indent = 0
 let g:vim_markdown_auto_insert_bullets = 0
 let g:vim_markdown_new_list_item_indent = 0
 ""}}}
@@ -474,8 +497,8 @@ if has('gui')
   let g:airline_powerline_fonts = 1
   let g:airline_theme='hybrid'
 else
-  let g:airline_theme='base16_vim'
-  " let g:airline_symbols_ascii = 1
+  let g:airline_theme='deus'
+  let g:airline_symbols_ascii = 1
 endif
 
 if has('windows')
@@ -540,14 +563,11 @@ if v:version > 703 || v:version == 703 && has('patch541')
   set formatlistpat+=^\\s*[-–+o*•]\\s\\+      " Bullet points
 endif
 
-function! Preserve(command)
-  let l:saved_winview = winsaveview()
-  execute a:command
-  call winrestview(l:saved_winview)
-endfunction
+" Add full path and buffer number to Ctrl-G display
+nnoremap <C-g> 2<C-g>
 
-" Remove trailing whitespace
-nnoremap <silent> <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
+" Highlight all occurrences of current word without moving
+nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Open files located in the same dir in with the current file is edited
 nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
@@ -555,6 +575,29 @@ nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
 " but only change the path for the current window
 nnoremap <leader>lcd :lcd %:h<CR>
 
+" https://github.com/jwhitley/vim-preserve
+function! Preserve(command)
+  let l:saved_winview = winsaveview()
+  let l:last_search = getreg('/')
+  execute 'keepjumps ' . a:command
+  call winrestview(l:saved_winview)
+  call setreg('/', l:last_search)
+endfunction
+
+" Remove trailing whitespace
+nnoremap <silent> <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
+
+" Visual select last paste
+nnoremap <expr> gp '`[' . getregtype()[0] . '`]'
+
+" https://vim.fandom.com/wiki/Smart_home
+noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
+noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
+imap <Home> <C-o><Home>
+imap <End> <C-o><End>
+
+"Inspired by https://vim.fandom.com/wiki/Find_in_files_within_Vim
 nmap <F7> :Search<Space>
 nmap <S-F7> :ESearch<Space>
 
@@ -563,13 +606,12 @@ func Eatchar(pat)
   return (c =~ a:pat) ? '' : c
 endfunc
 
-"Inspired by https://vim.fandom.com/wiki/Find_in_files_within_Vim
 cabbrev Search
-      \ vimgrep //gj
+      \ vimgrep //j
       \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
       \ <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
 cabbrev ESearch
-      \ vimgrep /\<lt>\>/gj
+      \ vimgrep /\<lt>\>/j
       \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
       \ <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
@@ -622,11 +664,15 @@ endif
 
 runtime! mywin.vim
 
-colorscheme base
+if !has('gui')
+  let g:webdevicons_enable = 0
+endif
 
 if g:machine =~ 'E3000*'
   set pythonthreedll=$USERPROFILE\AppData\Local\Continuum\miniconda3\python37.dll
   set pythonthreehome=$USERPROFILE\AppData\Local\Continuum\miniconda3\
+elseif g:machine == 'CAPRICA'
+  let g:FactorRoot = 'D:\factor'
 endif
 
 " Convenient command to see the difference between the current buffer and the
