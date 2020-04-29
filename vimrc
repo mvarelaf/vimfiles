@@ -39,10 +39,13 @@ function! PackagerInit() abort
   call packager#add('mattn/calendar-vim')
   call packager#add('mhinz/vim-startify')
   call packager#add('mhinz/vim-sayonara')
-  call packager#add('godlygeek/tabular')
+  "call packager#add('godlygeek/tabular')
+  "call packager#add('junegunn/vim-easy-align')
+  "call packager#add('tommcdo/vim-lion')
   call packager#add('lifepillar/vim-mucomplete')
   call packager#add('tpope/vim-surround')
   call packager#add('tpope/vim-repeat')
+  call packager#add('tpope/vim-unimpaired')
   call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
   call packager#add('tpope/vim-dispatch')
@@ -59,6 +62,7 @@ function! PackagerInit() abort
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
   call packager#add('justinmk/vim-dirvish')
+  call packager#add('wannesm/wmgraphviz.vim')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -184,6 +188,11 @@ set virtualedit=block
 set shortmess+=r    " use "[RO]" instead of "[readonly]"
 set shortmess+=m    " use "[+]" instead of "[Modified]"
 set shortmess-=S    " show search count message when searching, e.g. [1/5]"
+set shortmess+=n    " n use "[New]" instead of "[New File]"
+set shortmess+=w    " w use "[w]" instead of "written" for file write message
+                    " and "[a]" instead of "appended" for ':w >> file' command
+set shortmess+=x    " x use "[dos]" instead of "[dos format]", "[unix]" instead of
+                    "[unix format]" and "[mac]" instead of "[mac format]".
 
 set suffixes+=.pyc,.pyo,.egg-info,.class
 
@@ -235,7 +244,10 @@ endif
 
 " ignore whitespace in diff mode
 set diffopt+=iwhite,vertical
-set diffopt+=algorithm:minimal "myers is default algorithm
+if has("patch-8.1.0360") "from chrisbra/vim-diff-enhanced
+  set diffopt+=algorithm:patience "myers is default algorithm
+  set diffopt+=indent-heuristic
+endif
 
 if has('linebreak')
   set linebreak
@@ -270,6 +282,8 @@ set scrolloff=3
 
 " No statusline, fold, vertical or diff fillchars
 set fillchars=
+
+set nostartofline
 
 if has('vcon')
   set termguicolors
@@ -423,18 +437,18 @@ nmap P <plug>(YoinkPaste_P)
 nmap y <plug>(YoinkYankPreserveCursorPosition)
 xmap y <plug>(YoinkYankPreserveCursorPosition)
 
-let g:yoinkAutoFormatPaste = 1
+" let g:yoinkAutoFormatPaste = 1
 ""}}}
 
-"" VIM-MARKDOWN {{{
-" let g:vim_markdown_folding_style_pythonic = 1
-" let g:vim_markdown_override_foldtext = 1
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_follow_anchor = 1
-let g:vim_markdown_strikethrough = 1
-let g:vim_markdown_auto_insert_bullets = 0
-let g:vim_markdown_new_list_item_indent = 0
-""}}}
+""" VIM-MARKDOWN {{{
+"" let g:vim_markdown_folding_style_pythonic = 1
+"" let g:vim_markdown_override_foldtext = 1
+"let g:vim_markdown_toc_autofit = 1
+"let g:vim_markdown_follow_anchor = 1
+"let g:vim_markdown_strikethrough = 1
+"let g:vim_markdown_auto_insert_bullets = 0
+"let g:vim_markdown_new_list_item_indent = 0
+"""}}}
 
 "" VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
 if g:machine =~ 'E3000*'
@@ -537,6 +551,12 @@ let g:airline_mode_map = {
     \ }
 " }}}
 
+"" Easy align
+"" Start interactive EasyAlign in visual mode (e.g. vipga)
+"xmap ga <Plug>(EasyAlign)
+"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+"nmap ga <Plug>(EasyAlign)
+
 set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
         \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
@@ -587,12 +607,15 @@ endfunction
 " Remove trailing whitespace
 nnoremap <silent> <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 
+vnoremap <silent> <S-F1> :retab
+
 " Visual select last paste
 nnoremap <expr> gp '`[' . getregtype()[0] . '`]'
 
 " https://vim.fandom.com/wiki/Smart_home
 noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
-noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+" noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? 'g_' : '$')
 vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home>
 imap <End> <C-o><End>
