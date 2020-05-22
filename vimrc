@@ -27,6 +27,7 @@ let g:loaded_zipPlugin = 1
 let g:loaded_tarPlugin = 1
 " let g:loaded_spellfile_plugin = 1
 " let g:loaded_2html_plugin = 1
+" let g:loaded_netrwPlugin = 1
 
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
@@ -39,9 +40,6 @@ function! PackagerInit() abort
   call packager#add('mattn/calendar-vim')
   call packager#add('mhinz/vim-startify')
   call packager#add('mhinz/vim-sayonara')
-  "call packager#add('godlygeek/tabular')
-  "call packager#add('junegunn/vim-easy-align')
-  "call packager#add('tommcdo/vim-lion')
   call packager#add('lifepillar/vim-mucomplete')
   call packager#add('tpope/vim-surround')
   call packager#add('tpope/vim-repeat')
@@ -53,22 +51,24 @@ function! PackagerInit() abort
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
-  call packager#add('majutsushi/tagbar')
   call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
   call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
+  call packager#add('haya14busa/vim-asterisk')
+  call packager#add('tyru/open-browser.vim')
   call packager#add('dense-analysis/ale')
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
   call packager#add('justinmk/vim-dirvish')
-  call packager#add('wannesm/wmgraphviz.vim')
+  call packager#add('t9md/vim-choosewin')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
   "Loaded only for specific filetypes on demand. Requires autocommands below.
   call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
-  call packager#add('plasticboy/vim-markdown', { 'type': 'opt' })
+  call packager#add('tpope/vim-markdown', { 'type': 'opt' })
+  call packager#add('masukomi/vim-markdown-folding', { 'type': 'opt' })
   call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
   call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
   call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
@@ -83,6 +83,7 @@ command! PackagerStatus call PackagerInit() | call packager#status()
 augroup packager_filetype
   autocmd!
   autocmd FileType markdown packadd vim-markdown
+  autocmd FileType markdown packadd vim-markdown-folding
   autocmd FileType csv packadd csv.vim
   autocmd FileType racket packadd vim-racket
   autocmd FileType racket,scheme,lisp packadd vim-parinfer
@@ -298,6 +299,29 @@ let g:netrw_liststyle = 3 " show subfolders as ascii tree
 
 "" }}}
 
+"" OPEN-BROWSER https://github.com/tyru/open-browser.vim {{{
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+"" }}}
+
+"" VIM-CHOOSEWIN https://github.com/t9md/vim-choosewin {{{
+nmap <Tab> <Plug>(choosewin)
+"" }}}
+
+"" VIM-ASTERISK https://github.com/haya14busa/vim-asterisk {{{
+let g:asterisk#keeppos = 1
+
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+"" }}}
+
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
 set shortmess+=c    " Shut off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
@@ -326,30 +350,6 @@ iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR>
 
 "" :TOhtml {{{
 let html_use_css = 1 "Use CSS instead of <br> and a lot of &nbsp;
-"" }}}
-
-"" Tagbar https://github.com/majutsushi/tagbar {{{
-nmap <F12> :TagbarToggle<CR>
-let g:tagbar_type_vimwiki = {
-    \ 'ctagstype' : 'wiki',
-    \ 'kinds' : [
-        \ 'h:header_l1',
-        \ 'i:header_l2',
-        \ 'j:header_l3',
-        \ 'k:header_l4',
-        \ 'l:header_l5',
-        \ 'm:header_l6'
-    \ ],
-    \ 'sort': 0
-\ }
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
-    \ ]
-\ }
 "" }}}
 
 "" CALENDAR https://github.com/mattn/calendar-vim {{{
@@ -440,16 +440,6 @@ xmap y <plug>(YoinkYankPreserveCursorPosition)
 " let g:yoinkAutoFormatPaste = 1
 ""}}}
 
-""" VIM-MARKDOWN {{{
-"" let g:vim_markdown_folding_style_pythonic = 1
-"" let g:vim_markdown_override_foldtext = 1
-"let g:vim_markdown_toc_autofit = 1
-"let g:vim_markdown_follow_anchor = 1
-"let g:vim_markdown_strikethrough = 1
-"let g:vim_markdown_auto_insert_bullets = 0
-"let g:vim_markdown_new_list_item_indent = 0
-"""}}}
-
 "" VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
 if g:machine =~ 'E3000*'
   let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
@@ -465,6 +455,7 @@ if g:machine =~ 'E3000*'
      \ {'path': wikidocs1},
      \ {'path': wikidocs2,'index': 'mis_notas'}]
 endif
+          " \ 'template_default': 'article_template',
 
 let g:vimwiki_use_mouse = 1
 "let g:vimwiki_auto_checkbox = 0
@@ -484,12 +475,6 @@ nmap <C-F3> :Vimwiki2HTML<CR>
 imap <C-F3> <Esc><C-F3>
 nmap <C-S-F3> :VimwikiAll2HTML<CR>
 imap <C-S-F3> <Esc><C-S-F3>
-"" }}}
-
-"" TABULAR  https://github.com/godlygeek/tabular {{{
-" if exists(':Tabularize')
-  command! -nargs=1 -range TabFirst exec <line1> . ',' . <line2> . 'Tabularize /^[^' . escape(<q-args>, '\^$.[?*~') . ']*\zs' . escape(<q-args>, '\^$.[?*~')
-" endif
 "" }}}
 
 "" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
@@ -551,12 +536,6 @@ let g:airline_mode_map = {
     \ }
 " }}}
 
-"" Easy align
-"" Start interactive EasyAlign in visual mode (e.g. vipga)
-"xmap ga <Plug>(EasyAlign)
-"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-"nmap ga <Plug>(EasyAlign)
-
 set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
         \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
@@ -587,7 +566,7 @@ endif
 nnoremap <C-g> 2<C-g>
 
 " Highlight all occurrences of current word without moving
-nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Open files located in the same dir in with the current file is edited
 nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
