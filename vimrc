@@ -306,7 +306,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 "" }}}
 
 "" VIM-CHOOSEWIN https://github.com/t9md/vim-choosewin {{{
-nmap <Tab> <Plug>(choosewin)
+nmap <leader>w <Plug>(choosewin)
+let g:choosewin_blink_on_land = 0
+" let g:choosewin_return_on_single_win = 1
 "" }}}
 
 "" VIM-ASTERISK https://github.com/haya14busa/vim-asterisk {{{
