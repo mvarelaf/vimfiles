@@ -359,6 +359,12 @@ let g:calendar_monday = 1
 let g:calendar_weeknm = 2 " WK 1
 let g:calendar_mark = 'left-fit'
 let g:calendar_number_of_months = 6
+if has('autocmd')
+  augroup calendar
+  autocmd!
+  autocmd Filetype calendar setlocal nonumber norelativenumber
+  augroup END
+endif
 "" }}}
 
 "" STARTIFY https://github.com/mhinz/vim-startify {{{
