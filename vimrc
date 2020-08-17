@@ -636,6 +636,9 @@ if has('autocmd')
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
+  if has('file_in_path')
+    autocmd FileType markdown setlocal suffixesadd=.md,.markdown
+  endif
   autocmd FileType racket setlocal tabstop=2 shiftwidth=2 commentstring=;;%s
   " Some file types use real tabs
   autocmd FileType make setlocal noexpandtab
