@@ -634,6 +634,7 @@ if has('autocmd')
   autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
+  autocmd FileType text setlocal commentstring=/*%s*/ " used by commentary.vim
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
   if has('file_in_path')
