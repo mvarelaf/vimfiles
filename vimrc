@@ -350,6 +350,9 @@ iab _time <C-R>=strftime("%H:%M:%S")<CR>
 iab _dates <C-R>=strftime("%d/%m/%Y %H:%M")<CR>
 "iab _fecha <C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR>
+iab _iso_date <C-R>=strftime("%FT%T%z")<CR>
+iab _rfc_date <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+
 "" }}}
 
 "" :TOhtml {{{
