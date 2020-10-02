@@ -27,7 +27,7 @@ let g:loaded_zipPlugin = 1
 let g:loaded_tarPlugin = 1
 " let g:loaded_spellfile_plugin = 1
 " let g:loaded_2html_plugin = 1
-" let g:loaded_netrwPlugin = 1
+let g:loaded_netrwPlugin = 1
 
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
@@ -62,8 +62,8 @@ function! PackagerInit() abort
   call packager#add('ryanoasis/vim-devicons')
   call packager#add('justinmk/vim-dirvish')
   call packager#add('t9md/vim-choosewin')
-  call packager#add('jlanzarotta/bufexplorer')
-  call packager#add('mtth/cursorcross.vim')
+  " call packager#add('jlanzarotta/bufexplorer')
+  " call packager#add('mtth/cursorcross.vim')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -502,13 +502,27 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_open_list = 1
 "" }}}
 
+" Poor man bufexplorer
+nnoremap <leader>ls :ls<CR>:b<space>
+
 "" BUFEXPLORER https://github.com/jlanzarotta/bufexplorer {{{
-let g:bufExplorerFindActive=0        " Do not go to active window.
+" let g:bufExplorerFindActive=0        " Do not go to active window.
 "" }}}
 
+if has('autocmd')
+  if has('gui')
+    augroup cursor_line
+      autocmd!
+      au VimEnter * set cursorline
+      au WinLeave,InsertEnter * set nocursorline
+      au WinEnter,InsertLeave * set cursorline
+    augroup END
+  endif
+endif
+
 "" CURSORCROSS https://github.com/mtth/cursorcross.vim {{{
-let g:cursorcross_dynamic = 'lw'
-let g:cursorcross_mappings = 0 " Interferes with dirvish
+" let g:cursorcross_dynamic = 'lw'
+" let g:cursorcross_mappings = 0 " Interferes with dirvish
 "" }}}
 
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
@@ -596,9 +610,6 @@ nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
 " but only change the path for the current window
 nnoremap <leader>lcd :lcd %:h<CR>
 
-" Poor man bufexplorer
-nnoremap <leader>ls :ls<CR>:b<space>
-
 " https://github.com/jwhitley/vim-preserve
 function! Preserve(command)
   let l:saved_winview = winsaveview()
@@ -680,17 +691,6 @@ if has('autocmd')
   " The following autocommand will cause the quickfix window to open after any grep invocation:
   autocmd QuickFixCmdPost *grep* cwindow
   augroup END
-
-  " Instead of https://github.com/mtth/cursorcross.vim
-  " if has('gui')
-  "   augroup cursor_line
-  "     autocmd!
-  "     au VimEnter * set cursorline
-  "     au WinLeave,InsertEnter * set nocursorline
-  "     au WinEnter,InsertLeave * set cursorline
-  "   augroup END
-  " endif
-
 endif
 "" }}}
 
