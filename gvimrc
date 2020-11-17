@@ -24,8 +24,8 @@ set guifont=SauceCodePro_NF:h9
 
 " https://github.com/tomasiser/vim-code-dark
 if has('directx') && has('windows')
-  set renderoptions=type:directx
-  "set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
+  " set renderoptions=type:directx
+  set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
 endif
 
 set browsedir=buffer

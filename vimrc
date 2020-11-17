@@ -44,24 +44,25 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-surround')
   call packager#add('tpope/vim-repeat')
   call packager#add('tpope/vim-unimpaired')
-  call packager#add('tpope/vim-speeddating')
+  " call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
-  call packager#add('tpope/vim-dispatch')
+  " call packager#add('tpope/vim-dispatch')
   call packager#add('tpope/vim-fugitive')
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
   call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
-  call packager#add('stefandtw/quickfix-reflector.vim')
+  " call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
   call packager#add('haya14busa/vim-asterisk')
   call packager#add('tyru/open-browser.vim')
-  call packager#add('dense-analysis/ale')
+  " call packager#add('dense-analysis/ale')
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
-  call packager#add('justinmk/vim-dirvish')
-  call packager#add('t9md/vim-choosewin')
+  " call packager#add('justinmk/vim-dirvish')
+  " call packager#add('t9md/vim-choosewin')
+  call packager#add('yegappan/bufselect')
   " call packager#add('jlanzarotta/bufexplorer')
   " call packager#add('mtth/cursorcross.vim')
   "call packager#add('')
@@ -71,9 +72,9 @@ function! PackagerInit() abort
   call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
   call packager#add('tpope/vim-markdown', { 'type': 'opt' })
   call packager#add('masukomi/vim-markdown-folding', { 'type': 'opt' })
-  call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
-  call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
-  call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
+  " call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
+  " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
+  " call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
   call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
 endfunction
 
@@ -312,9 +313,9 @@ vmap gx <Plug>(openbrowser-smart-search)
 "" }}}
 
 "" VIM-CHOOSEWIN https://github.com/t9md/vim-choosewin {{{
-nmap <leader>w <Plug>(choosewin)
-let g:choosewin_blink_on_land = 0
-" let g:choosewin_return_on_single_win = 1
+" nmap <leader>w <Plug>(choosewin)
+" let g:choosewin_blink_on_land = 0
+" " let g:choosewin_return_on_single_win = 1
 "" }}}
 
 "" VIM-ASTERISK https://github.com/haya14busa/vim-asterisk {{{
@@ -409,17 +410,17 @@ nnoremap <silent> <leader>q :Sayonara!<cr>
 "" }}}
 
 "" DISPATCH https://github.com/tpope/vim-dispatch {{{
-let g:dispatch_no_maps = 1
+" let g:dispatch_no_maps = 1
 "" }}}
 
 "" SPEEDDATING https://github.com/tpope/vim-speeddating {{{
-let g:speeddating_no_mappings = 1
-nmap  <C-A>     <Plug>SpeedDatingUp
-nmap  <C-X>     <Plug>SpeedDatingDown
-vmap  <C-A>     <Plug>SpeedDatingUp
-vmap  <C-K>     <Plug>SpeedDatingDown
-nmap d<C-A>     <Plug>SpeedDatingNowUTC
-nmap d<C-X>     <Plug>SpeedDatingNowLocal
+" let g:speeddating_no_mappings = 1
+" nmap  <C-A>     <Plug>SpeedDatingUp
+" nmap  <C-X>     <Plug>SpeedDatingDown
+" vmap  <C-A>     <Plug>SpeedDatingUp
+" vmap  <C-K>     <Plug>SpeedDatingDown
+" nmap d<C-A>     <Plug>SpeedDatingNowUTC
+" nmap d<C-X>     <Plug>SpeedDatingNowLocal
 "" }}}
 
 "" VIMTODO https://github.com/mivok/vimtodo {{{
@@ -501,11 +502,11 @@ let g:slime_target = "vimterminal"
 "" }}}
 
 "" ALE https://github.com/dense-analysis/ale {{{
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+" " let g:ale_set_quickfix = 1
+" let g:ale_open_list = 1
 "" }}}
 
 " Poor man bufexplorer
@@ -513,6 +514,11 @@ nnoremap <leader>ls :ls<CR>:b<space>
 
 "" BUFEXPLORER https://github.com/jlanzarotta/bufexplorer {{{
 " let g:bufExplorerFindActive=0        " Do not go to active window.
+"" }}}
+
+"" BUFSELECT https://github.com/yegappan/bufselect {{{
+nmap <F2> <Plug>Bufselect_Toggle
+nnoremap <leader>b :Bufselect<CR>
 "" }}}
 
 if has('autocmd')
@@ -640,7 +646,7 @@ nnoremap <expr> gp '`[' . getregtype()[0] . '`]'
 
 " https://vim.fandom.com/wiki/Smart_home
 noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
-" " noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+"" noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
 " noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? 'g_' : '$')
 " vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home>
@@ -765,3 +771,13 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
+
+"" TAGBAR https://github.com/preservim/tagbar {{{
+" https://github.com/majutsushi/tagbar
+nmap <F12> :TagbarToggle<CR>
+
+"" }}}
+
+"" FONTSIZE https://github.com/drmikehenry/vim-fontsizelet {{{
+let g:fontsize#timeout = 0
+"" }}}
