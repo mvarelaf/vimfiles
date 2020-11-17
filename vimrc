@@ -27,7 +27,7 @@ let g:loaded_zipPlugin = 1
 let g:loaded_tarPlugin = 1
 " let g:loaded_spellfile_plugin = 1
 " let g:loaded_2html_plugin = 1
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrwPlugin = 1
 
 """ PACKAGER https://github.com/kristijanhusak/vim-packager {{{
 " based on https://github.com/k-takata/minpac
@@ -74,6 +74,7 @@ function! PackagerInit() abort
   call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
   call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
   call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
+  call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
 endfunction
 
 command! PackagerInstall call PackagerInit() | call packager#install()
@@ -90,6 +91,7 @@ augroup packager_filetype
   autocmd FileType racket packadd vim-racket
   autocmd FileType racket,scheme,lisp packadd vim-parinfer
   autocmd FileType racket,scheme,lisp packadd vim-slime
+  autocmd FileType r packadd Nvim-R
 augroup END
 
 """ }}}
@@ -202,6 +204,7 @@ set suffixes+=.pyc,.pyo,.egg-info,.class
 set wildmode=longest,full
 
 if has('wildignore')
+  set wildignorecase
   set wildignore=*.o,*.obj,*.bak,*.exe,*.swp,*~,*.tmp
   set wildignore+=.git,.hg,.svn
   set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
@@ -222,6 +225,7 @@ if has('wildignore')
   set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.msu
   set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
   set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
+  set wildignore+=tags
 
 endif
 
@@ -389,10 +393,12 @@ else
         \ ]
 endif
 
+let g:startify_files_number = 20
+
+      " \ { 'type': 'dir',       'header': ['   MRU '.getcwd()]  },
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '.getcwd()]  },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
@@ -525,6 +531,11 @@ endif
 " let g:cursorcross_mappings = 0 " Interferes with dirvish
 "" }}}
 
+"" VIM-MARKDOWN-FOLDING https://github.com/mvarelaf/vim-markdown-folding {{{
+" de upstream https://github.com/masukomi/vim-markdown-folding
+let g:markdown_fold_indent_title = 1
+"" }}}
+
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 set noshowmode
 
@@ -629,15 +640,15 @@ nnoremap <expr> gp '`[' . getregtype()[0] . '`]'
 
 " https://vim.fandom.com/wiki/Smart_home
 noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
-" noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
-noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? 'g_' : '$')
-vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
+" " noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+" noremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? 'g_' : '$')
+" vnoremap <expr> <End> (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
 imap <Home> <C-o><Home>
-imap <End> <C-o><End>
+" imap <End> <C-o><End>
 
 "Inspired by https://vim.fandom.com/wiki/Find_in_files_within_Vim
-nmap <F7> :Search<Space>
-nmap <S-F7> :ESearch<Space>
+nmap <F3> :Search<Space>
+nmap <S-F3> :ESearch<Space>
 
 func Eatchar(pat)
   let c = nr2char(getchar(0))
@@ -674,7 +685,9 @@ if has('autocmd')
   autocmd FileType gitconfig setlocal noexpandtab
   " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
   autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-  augroup END
+  autocmd FileType c setlocal noexpandtab cinoptions=:0,l1,t0,g0,(0
+  autocmd FileType sql let g:omni_sql_no_default_maps = 1
+augroup END
 
   augroup vimrcEx
   autocmd!
