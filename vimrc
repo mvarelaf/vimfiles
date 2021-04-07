@@ -46,6 +46,7 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-unimpaired')
   " call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
+  call packager#add('tpope/vim-vinegar')
   " call packager#add('tpope/vim-dispatch')
   call packager#add('tpope/vim-fugitive')
   call packager#add('vim-airline/vim-airline')
@@ -65,6 +66,8 @@ function! PackagerInit() abort
   call packager#add('yegappan/bufselect')
   " call packager#add('jlanzarotta/bufexplorer')
   " call packager#add('mtth/cursorcross.vim')
+  " call packager#add('drmikehenry/vim-fontsize')
+  call packager#add('preservim/tagbar')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -184,13 +187,14 @@ set infercase
 set copyindent
 set smartindent
 
-set clipboard=unnamed "copying from others with p, instead of "*p
+set clipboard=unnamed
 
 set matchpairs=(:),{:},[:],<:> "for use with % key
 set showmatch "show matching matchpair after completion
 
 set virtualedit=block
 
+set shortmess-=I    " don't give the intro message when starting Vim
 set shortmess+=r    " use "[RO]" instead of "[readonly]"
 set shortmess+=m    " use "[+]" instead of "[Modified]"
 set shortmess-=S    " show search count message when searching, e.g. [1/5]"
@@ -560,12 +564,12 @@ elseif has('linux')
 endif
 
 let g:airline#extensions#csv#column_display = 'Name'
-let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#vcs_checks = ['untracked']
 
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#wordcount#enabled = 0
-let g:airline_section_z = '%l/%L,%v %p%%'
+let g:airline_section_z = '%l/%L,%02v %p%%'
 
 let g:airline_mode_map = {
     \ '__'     : '-',
@@ -589,9 +593,59 @@ let g:airline_mode_map = {
     \ }
 " }}}
 
-set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
-        \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
-        \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
+"" Status bar colors
+"au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
+"au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+"" au InsertEnter * hi statusline guibg=#d7afff ctermbg=magenta
+"" au InsertLeave * hi statusline guibg=#8fbfdc ctermbg=cyan
+"hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+
+" Status Line Custom
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+
+set laststatus=2
+set noshowmode
+set statusline=
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
+" set statusline+=%3*│                                     " Separator
+" set statusline+=%2*\ %Y\                                 " FileType
+" set statusline+=%3*│                                     " Separator
+" set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
+" set statusline+=\(%{&ff})                               " FileFormat (dos/unix..)
+set statusline+=%=                                       " Right Side
+" set statusline+=%3*│                                     " Separator
+set statusline+=%0*\ %l/%L,%02v\ %p%%\                     " Line number / total lines, percentage of document
+" set statusline+=%1*\ %02l/%L,%02v\ %p%%\                " Line number / total lines, percentage of document
+
+hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
+hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
+hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
+hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
+
+" set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
+        " \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
+        " \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
 
 " set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
 "         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
@@ -779,5 +833,5 @@ nmap <F12> :TagbarToggle<CR>
 "" }}}
 
 "" FONTSIZE https://github.com/drmikehenry/vim-fontsizelet {{{
-let g:fontsize#timeout = 0
+" let g:fontsize#timeout = 0
 "" }}}
