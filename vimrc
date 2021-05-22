@@ -68,6 +68,7 @@ function! PackagerInit() abort
   " call packager#add('mtth/cursorcross.vim')
   " call packager#add('drmikehenry/vim-fontsize')
   call packager#add('preservim/tagbar')
+  call packager#add('lifepillar/vim-outlaw')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -79,6 +80,8 @@ function! PackagerInit() abort
   " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
   " call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
   call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
+  call packager#add('aaronbieber/vim-quicktask', { 'type': 'opt' })
+  " call packager#add('lifepillar/vim-outlaw', { 'type': 'opt' })
 endfunction
 
 command! PackagerInstall call PackagerInit() | call packager#install()
@@ -92,10 +95,12 @@ augroup packager_filetype
   autocmd FileType markdown packadd vim-markdown
   autocmd FileType markdown packadd vim-markdown-folding
   autocmd FileType csv packadd csv.vim
+  autocmd FileType quicktask packadd quicktask
   autocmd FileType racket packadd vim-racket
   autocmd FileType racket,scheme,lisp packadd vim-parinfer
   autocmd FileType racket,scheme,lisp packadd vim-slime
   autocmd FileType r packadd Nvim-R
+  autocmd BufNewFile,BufRead *quicktask* packadd vim-quicktask
 augroup END
 
 """ }}}
@@ -171,7 +176,7 @@ endif
 if empty(mapcheck('<C-W>', 'i'))
   inoremap <C-W> <C-G>u<C-W>
 endif
-"" END OF COPIED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
+"" END OF ADAPTED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
 
 set showcmd
 set hidden
@@ -194,7 +199,7 @@ set showmatch "show matching matchpair after completion
 
 set virtualedit=block
 
-set shortmess-=I    " don't give the intro message when starting Vim
+set shortmess+=I    " don't give the intro message when starting Vim
 set shortmess+=r    " use "[RO]" instead of "[readonly]"
 set shortmess+=m    " use "[+]" instead of "[Modified]"
 set shortmess-=S    " show search count message when searching, e.g. [1/5]"
@@ -206,7 +211,8 @@ set shortmess+=x    " x use "[dos]" instead of "[dos format]", "[unix]" instead 
 
 set suffixes+=.pyc,.pyo,.egg-info,.class
 
-set wildmode=longest,full
+" set wildmode=longest,full
+set wildmode=longest:list,full
 
 if has('wildignore')
   set wildignorecase
@@ -237,7 +243,12 @@ endif
 set nojoinspaces " Use only 1 space after "." when joining lines, not 2
 
 if has('insert_expand')
-  set completeopt=menuone,noinsert,noselect
+  " set completeopt=menuone,noinsert,noselect
+  set completeopt=menuone,noinsert,preview "menu,preview "is the default
+endif
+
+if has('mksession')
+  set sessionoptions-=blank
 endif
 
 set splitright
@@ -451,6 +462,11 @@ else
 endif
 ""}}}
 
+"" VIM-QUICKTASK https://github.com/aaronbieber/vim-quicktask {{{
+let g:quicktask_snip_path = expand("$USERPROFILE").'\Documents\notas\snips'
+let g:quicktask_snip_win_split_direction = "vertical"
+""" }}}
+
 "" YOINK https://github.com/svermeulen/vim-yoink {{{
 nmap <c-n> <plug>(YoinkPostPasteSwapBack)
 nmap <c-p> <plug>(YoinkPostPasteSwapForward)
@@ -593,9 +609,9 @@ let g:airline_mode_map = {
     \ 'S'      : 'S',
     \ ''     : 'S',
     \ 't'      : 'T',
-    \ 'v'      : 'V',
+    \ 'v'      : 'v',
     \ 'V'      : 'V',
-    \ ''     : 'V',
+    \ ''     : '|V|',
     \ }
 " }}}
 
@@ -734,12 +750,14 @@ cabbrev ESearch
 if has('autocmd')
   augroup fileTypes
   autocmd!
+  autocmd Filetype outlaw setlocal tabstop=2 shiftwidth=2
   autocmd Filetype todo setlocal tabstop=2 shiftwidth=2
   autocmd FileType vim setlocal tabstop=2 shiftwidth=2 textwidth=79
   autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
-  autocmd FileType text setlocal commentstring=/*%s*/ " used by commentary.vim
+  " moved to after/ftplugin/text.vim
+  " autocmd FileType text set commentstring=/*%s*/ " used by commentary.vim
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
   if has('file_in_path')

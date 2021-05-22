@@ -1,7 +1,10 @@
 " Adapted from https://www.vim.org/scripts/script.php?script_id=2188
 " colorscheme earendel_old
 
-colorscheme freya "hybrid
+" colorscheme freya
+" colorscheme hybrid
+" colorscheme moody
+colorscheme manuscript
 set background=dark
 
 " if g:machine == 'CAPRICA'
