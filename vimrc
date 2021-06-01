@@ -44,31 +44,23 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-surround')
   call packager#add('tpope/vim-repeat')
   call packager#add('tpope/vim-unimpaired')
-  " call packager#add('tpope/vim-speeddating')
   call packager#add('tpope/vim-commentary')
   call packager#add('tpope/vim-vinegar')
-  " call packager#add('tpope/vim-dispatch')
   call packager#add('tpope/vim-fugitive')
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
   call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
-  " call packager#add('stefandtw/quickfix-reflector.vim')
   call packager#add('tommcdo/vim-exchange')
   call packager#add('haya14busa/vim-asterisk')
   call packager#add('tyru/open-browser.vim')
-  " call packager#add('dense-analysis/ale')
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
-  " call packager#add('justinmk/vim-dirvish')
-  " call packager#add('t9md/vim-choosewin')
   call packager#add('yegappan/bufselect')
-  " call packager#add('jlanzarotta/bufexplorer')
-  " call packager#add('mtth/cursorcross.vim')
-  " call packager#add('drmikehenry/vim-fontsize')
+  call packager#add('yegappan/fileselect')
   call packager#add('preservim/tagbar')
-  call packager#add('lifepillar/vim-outlaw')
+  call packager#add('AndrewRadev/quickpeek.vim')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -80,8 +72,6 @@ function! PackagerInit() abort
   " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
   " call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
   call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
-  call packager#add('aaronbieber/vim-quicktask', { 'type': 'opt' })
-  " call packager#add('lifepillar/vim-outlaw', { 'type': 'opt' })
 endfunction
 
 command! PackagerInstall call PackagerInit() | call packager#install()
@@ -95,12 +85,10 @@ augroup packager_filetype
   autocmd FileType markdown packadd vim-markdown
   autocmd FileType markdown packadd vim-markdown-folding
   autocmd FileType csv packadd csv.vim
-  autocmd FileType quicktask packadd quicktask
-  autocmd FileType racket packadd vim-racket
-  autocmd FileType racket,scheme,lisp packadd vim-parinfer
-  autocmd FileType racket,scheme,lisp packadd vim-slime
+  " autocmd FileType racket packadd vim-racket
+  " autocmd FileType racket,scheme,lisp packadd vim-parinfer
+  " autocmd FileType racket,scheme,lisp packadd vim-slime
   autocmd FileType r packadd Nvim-R
-  autocmd BufNewFile,BufRead *quicktask* packadd vim-quicktask
 augroup END
 
 """ }}}
@@ -327,12 +315,6 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 "" }}}
 
-"" VIM-CHOOSEWIN https://github.com/t9md/vim-choosewin {{{
-" nmap <leader>w <Plug>(choosewin)
-" let g:choosewin_blink_on_land = 0
-" " let g:choosewin_return_on_single_win = 1
-"" }}}
-
 "" VIM-ASTERISK https://github.com/haya14busa/vim-asterisk {{{
 let g:asterisk#keeppos = 1
 
@@ -392,80 +374,10 @@ if has('autocmd')
 endif
 "" }}}
 
-"" STARTIFY https://github.com/mhinz/vim-startify {{{
-let g:startify_change_to_vcs_root = 1
-
-let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
-
-if g:machine =~ 'E3000*'
-  let g:startify_custom_header = []
-  let g:startify_bookmarks = [
-        \ {'p': expand("$USERPROFILE").'\Desktop\INFOP.txt' },
-        \ {'c': expand("$USERPROFILE").'\vimfiles\vimrc' }
-        \ ]
-else
-  let g:startify_bookmarks = [
-        \ {'c': expand("$USERPROFILE").'\vimfiles\vimrc' }
-        \ ]
-endif
-
-let g:startify_files_number = 20
-
-      " \ { 'type': 'dir',       'header': ['   MRU '.getcwd()]  },
-let g:startify_lists = [
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
-"" }}}
-
 "" SAYONARA https://github.com/mhinz/vim-sayonara {{{
-nnoremap <silent> <leader>q :Sayonara!<cr>
+nnoremap <silent> <leader>c :Sayonara!<cr>
+nnoremap <silent> <leader>q :Sayonara<cr>
 "" }}}
-
-"" DISPATCH https://github.com/tpope/vim-dispatch {{{
-" let g:dispatch_no_maps = 1
-"" }}}
-
-"" SPEEDDATING https://github.com/tpope/vim-speeddating {{{
-" let g:speeddating_no_mappings = 1
-" nmap  <C-A>     <Plug>SpeedDatingUp
-" nmap  <C-X>     <Plug>SpeedDatingDown
-" vmap  <C-A>     <Plug>SpeedDatingUp
-" vmap  <C-K>     <Plug>SpeedDatingDown
-" nmap d<C-A>     <Plug>SpeedDatingNowUTC
-" nmap d<C-X>     <Plug>SpeedDatingNowLocal
-"" }}}
-
-"" VIMTODO https://github.com/mivok/vimtodo {{{
-if &background == 'dark'
-  let g:todo_state_colors= {
-    \'DONE': 'Green',
-    \'CLOSED': 'Grey',
-    \'CANCELLED': 'Red',
-    \'TODO': 'Yellow',
-    \'WAITING': 'Brown',
-    \'HOLD': 'Grey',
-    \'INPROGRESS': 'Cyan',
-    \'SOMEDAY': 'Grey'}
-else
-  let g:todo_state_colors= {
-    \'DONE': 'Green',
-    \'CLOSED': 'Grey',
-    \'CANCELLED': 'Red',
-    \'TODO': 'Blue',
-    \'WAITING': 'Brown',
-    \'HOLD': 'Grey',
-    \'INPROGRESS': 'Cyan',
-    \'SOMEDAY': 'Grey'}
-endif
-""}}}
-
-"" VIM-QUICKTASK https://github.com/aaronbieber/vim-quicktask {{{
-let g:quicktask_snip_path = expand("$USERPROFILE").'\Documents\notas\snips'
-let g:quicktask_snip_win_split_direction = "vertical"
-""" }}}
 
 "" YOINK https://github.com/svermeulen/vim-yoink {{{
 nmap <c-n> <plug>(YoinkPostPasteSwapBack)
@@ -523,28 +435,21 @@ nmap <C-S-F3> :VimwikiAll2HTML<CR>
 imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
-"" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
-let g:slime_target = "vimterminal"
-"" }}}
-
-"" ALE https://github.com/dense-analysis/ale {{{
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" " let g:ale_set_quickfix = 1
-" let g:ale_open_list = 1
-"" }}}
+" "" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
+" let g:slime_target = "vimterminal"
+" "" }}}
 
 " Poor man bufexplorer
 nnoremap <leader>ls :ls<CR>:b<space>
 
-"" BUFEXPLORER https://github.com/jlanzarotta/bufexplorer {{{
-" let g:bufExplorerFindActive=0        " Do not go to active window.
-"" }}}
-
 "" BUFSELECT https://github.com/yegappan/bufselect {{{
 nmap <F2> <Plug>Bufselect_Toggle
 nnoremap <leader>b :Bufselect<CR>
+"" }}}
+
+"" FILESELECT https://github.com/yegappan/fileselect {{{
+nmap <F4> <Plug>Fileselect_Toggle
+nnoremap <leader>f :Fileselect<CR>
 "" }}}
 
 if has('autocmd')
@@ -558,13 +463,8 @@ if has('autocmd')
   endif
 endif
 
-"" CURSORCROSS https://github.com/mtth/cursorcross.vim {{{
-" let g:cursorcross_dynamic = 'lw'
-" let g:cursorcross_mappings = 0 " Interferes with dirvish
-"" }}}
-
 "" VIM-MARKDOWN-FOLDING https://github.com/mvarelaf/vim-markdown-folding {{{
-" de upstream https://github.com/masukomi/vim-markdown-folding
+" from upstream https://github.com/masukomi/vim-markdown-folding
 let g:markdown_fold_indent_title = 1
 "" }}}
 
@@ -756,8 +656,6 @@ if has('autocmd')
   autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
   autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
-  " moved to after/ftplugin/text.vim
-  " autocmd FileType text set commentstring=/*%s*/ " used by commentary.vim
   autocmd FileType markdown compiler pandoc
   autocmd FileType markdown setlocal conceallevel=2
   if has('file_in_path')
@@ -853,9 +751,9 @@ endfunction
 "" TAGBAR https://github.com/preservim/tagbar {{{
 " https://github.com/majutsushi/tagbar
 nmap <F12> :TagbarToggle<CR>
-
 "" }}}
 
-"" FONTSIZE https://github.com/drmikehenry/vim-fontsizelet {{{
-" let g:fontsize#timeout = 0
+"" QUICKPEEK https://github.com/AndrewRadev/quickpeek.vim {{{
+" let g:quickpeek_auto = v:true
+let g:quickpeek_window_settings = []
 "" }}}
