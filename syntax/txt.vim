@@ -41,7 +41,7 @@ syn match txtString "[[:alpha:]]" contains=txtOperator
 
 " Numbers
 "syn match txtNumber "\d\(\.\d\+\)\?"
-syn match txtNumber "\d"
+syn match txtNumber "\<\d*\>"
 
 " Cites
 syn region txtCite      matchgroup=txtOperator  start="\""      end="\""        contains=@txtContains,@txtAlwaysContains
@@ -78,13 +78,15 @@ syn match txtChangelogs         "\<rem\>\s*:" contains=txtOperator
 syn match txtChangelogs         "\<del\>\s*:" contains=txtOperator
 syn match txtChangelogs         "\<fix\>\s*:" contains=txtOperator
 
-syn keyword txtTodo todo fixme xxx note
-
-syn keyword txtError error bug
-
-syn keyword txtDebug debug
+syn keyword txtTodo xxx
 
 syn case match
+
+syn keyword txtTodo TODO FIXME NOTE
+
+syn keyword txtError ERROR BUG
+
+syn keyword txtDebug DEBUG
 
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
