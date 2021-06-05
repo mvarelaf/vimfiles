@@ -468,9 +468,8 @@ endif
 let g:markdown_fold_indent_title = 1
 "" }}}
 
-" AIRLINE https://github.com/vim-airline/vim-airline {{{
 set noshowmode
-
+" AIRLINE https://github.com/vim-airline/vim-airline {{{
 if has('gui')
   let g:airline_powerline_fonts = 1
   let g:airline_theme='hybrid'
@@ -514,64 +513,6 @@ let g:airline_mode_map = {
     \ ''     : '|V|',
     \ }
 " }}}
-
-"" Status bar colors
-"au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-"au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-"" au InsertEnter * hi statusline guibg=#d7afff ctermbg=magenta
-"" au InsertLeave * hi statusline guibg=#8fbfdc ctermbg=cyan
-"hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-
-" Status Line Custom
-let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
-
-set laststatus=2
-set noshowmode
-set statusline=
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-set statusline+=%1*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
-" set statusline+=%3*│                                     " Separator
-" set statusline+=%2*\ %Y\                                 " FileType
-" set statusline+=%3*│                                     " Separator
-" set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
-" set statusline+=\(%{&ff})                               " FileFormat (dos/unix..)
-set statusline+=%=                                       " Right Side
-" set statusline+=%3*│                                     " Separator
-set statusline+=%0*\ %l/%L,%02v\ %p%%\                     " Line number / total lines, percentage of document
-" set statusline+=%1*\ %02l/%L,%02v\ %p%%\                " Line number / total lines, percentage of document
-
-hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
-hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
-hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
-hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
-
-" set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
-        " \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
-        " \\%m%r%w%y\ %k\ %=%l/%L,%v\ %p%%
-
-" set statusline=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")
-"         \\ &&\ &bomb)?\",B\":\"\")}][%{&ff}]
-"         \\%m%r%w%y%=\%{MU()}\ %k\ %=\ %{FugitiveStatusline()}\ %l/%L,%v\ %p%%
 
 "https://vimways.org/2018/formatting-lists-with-vim/
 if v:version > 703 || v:version == 703 && has('patch541')
@@ -690,6 +631,7 @@ endif
 "" }}}
 
 runtime! mywin.vim
+runtime! statusline.vim
 
 if !has('gui')
   let g:webdevicons_enable = 0
