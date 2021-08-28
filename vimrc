@@ -539,7 +539,7 @@ nnoremap <C-g> 2<C-g>
 " nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 " Open files located in the same dir in with the current file is edited
-nnoremap <leader>ecd :e <C-R>=expand("%:.:h") . "/"<CR>
+nnoremap <leader>e :e <C-R>=expand("%:.:h") . "/"<CR>
 " 'cd' towards the directory in which the current file is edited
 " but only change the path for the current window
 nnoremap <leader>lcd :lcd %:h<CR>
@@ -556,10 +556,10 @@ endfunction
 " Remove trailing whitespace
 nnoremap <silent> <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 
-vnoremap <silent> <S-F1> :retab
+vnoremap <silent> <S-F1> :retab<CR>
 
 " Visual select last paste
-nnoremap <expr> gp '`[' . getregtype()[0] . '`]'
+nnoremap <expr> vp '`[' . getregtype()[0] . '`]'
 
 " https://vim.fandom.com/wiki/Smart_home
 noremap <expr> <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
