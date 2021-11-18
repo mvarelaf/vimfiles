@@ -20,7 +20,7 @@ function! StatusHighlights() abort
   highlight link StlMode    StlModeNORMAL
 endfunction
 
-if has('autocmd')
+if has('autocmd') && (exists('g:loaded_airline') && !g:loaded_airline)
   augroup MyColors
       autocmd!
       autocmd ColorScheme * call StatusHighlights()
