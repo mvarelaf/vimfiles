@@ -1,6 +1,4 @@
 "" STARTIFY https://github.com/mhinz/vim-startify {{{
-nnoremap <silent> <leader>s :Startify<cr>
-
 let g:startify_change_to_vcs_root = 1
 
 let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
@@ -8,6 +6,7 @@ let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
 if g:machine =~ 'E3000*'
   let g:startify_custom_header = []
   let g:startify_bookmarks = [
+        \ {'l': expand("$USERPROFILE").'\Documents\notas\links.txt' },
         \ {'p': expand("$USERPROFILE").'\Desktop\INFOP.txt' },
         \ {'c': expand("$USERPROFILE").'\vimfiles\vimrc' }
         \ ]
