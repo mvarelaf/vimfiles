@@ -4,6 +4,8 @@
 " colorscheme freya
 " colorscheme hybrid
 " colorscheme moody
+" colorscheme Tomorrow-Night
+" colorscheme simplon "light theme AirlineTheme silver
 colorscheme manuscript
 set background=dark
 
