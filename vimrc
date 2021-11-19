@@ -45,16 +45,11 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-repeat')
   call packager#add('tpope/vim-unimpaired')
   call packager#add('tpope/vim-commentary')
-  call packager#add('tpope/vim-vinegar')
   call packager#add('tpope/vim-fugitive')
   call packager#add('vim-airline/vim-airline')
   call packager#add('vim-airline/vim-airline-themes')
   call packager#add('mivok/vimtodo')
-  call packager#add('svermeulen/vim-yoink')
   call packager#add('vimwiki/vimwiki')
-  call packager#add('tommcdo/vim-exchange')
-  call packager#add('haya14busa/vim-asterisk')
-  call packager#add('tyru/open-browser.vim')
   call packager#add('flazz/vim-colorschemes')
   call packager#add('ryanoasis/vim-devicons')
   call packager#add('yegappan/bufselect')
@@ -71,7 +66,7 @@ function! PackagerInit() abort
   " call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
   " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
   " call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
-  call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
+  " call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
 endfunction
 
 command! PackagerInstall call PackagerInit() | call packager#install()
@@ -84,11 +79,11 @@ augroup packager_filetype
   autocmd!
   autocmd FileType markdown packadd vim-markdown
   autocmd FileType markdown packadd vim-markdown-folding
-  autocmd FileType csv packadd csv.vim
+  " autocmd FileType csv packadd csv.vim
   " autocmd FileType racket packadd vim-racket
   " autocmd FileType racket,scheme,lisp packadd vim-parinfer
   " autocmd FileType racket,scheme,lisp packadd vim-slime
-  autocmd FileType r packadd Nvim-R
+  " autocmd FileType r packadd Nvim-R
 augroup END
 
 """ }}}
@@ -242,7 +237,8 @@ endif
 set splitright
 set splitbelow
 
-set noequalalways
+" set noequalalways
+set equalalways eadirection=hor
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -309,27 +305,8 @@ let g:netrw_liststyle = 3 " show subfolders as ascii tree
 
 "" }}}
 
-"" OPEN-BROWSER https://github.com/tyru/open-browser.vim {{{
-let g:netrw_nogx = 1 " disable netrw's gx mapping.
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
-"" }}}
-
-"" VIM-ASTERISK https://github.com/haya14busa/vim-asterisk {{{
-let g:asterisk#keeppos = 1
-
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
-"" }}}
-
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
-set shortmess+=c    " Shut off completion messages
+" set shortmess+=c    " Shut off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 1000 " 1 second
 
@@ -375,28 +352,9 @@ endif
 "" }}}
 
 "" SAYONARA https://github.com/mhinz/vim-sayonara {{{
-nnoremap <silent> <leader>c :Sayonara!<cr>
-nnoremap <silent> <leader>q :Sayonara<cr>
+nnoremap <silent> <leader>q :Sayonara!<cr>
+nnoremap <silent> <leader>c :Sayonara<cr>
 "" }}}
-
-"" YOINK https://github.com/svermeulen/vim-yoink {{{
-nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-nmap <c-p> <plug>(YoinkPostPasteSwapForward)
-
-nmap p <plug>(YoinkPaste_p)
-nmap P <plug>(YoinkPaste_P)
-
-nmap gp <plug>(YoinkPaste_gp)
-nmap gP <plug>(YoinkPaste_gP)
-
-nmap [y <plug>(YoinkRotateBack)
-nmap ]y <plug>(YoinkRotateForward)
-
-nmap y <plug>(YoinkYankPreserveCursorPosition)
-xmap y <plug>(YoinkYankPreserveCursorPosition)
-
-" let g:yoinkAutoFormatPaste = 1
-""}}}
 
 "" VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
 if g:machine =~ 'E3000*'
@@ -435,10 +393,6 @@ nmap <C-S-F3> :VimwikiAll2HTML<CR>
 imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
-" "" VIM-SLIME https://github.com/jpalardy/vim-slime {{{
-" let g:slime_target = "vimterminal"
-" "" }}}
-
 " Poor man bufexplorer
 nnoremap <leader>ls :ls<CR>:b<space>
 
@@ -462,6 +416,9 @@ if has('autocmd')
     augroup END
   endif
 endif
+
+" Markdown
+let g:markdown_fenced_languages = ['sql']
 
 "" VIM-MARKDOWN-FOLDING https://github.com/mvarelaf/vim-markdown-folding {{{
 " from upstream https://github.com/masukomi/vim-markdown-folding
@@ -689,6 +646,10 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
+
+" after/plugin/startify.vim
+nnoremap <silent> <leader>s :split<bar>Startify<cr>
+nnoremap <silent> <leader>v :vsplit<bar>Startify<cr>
 
 "" TAGBAR https://github.com/preservim/tagbar {{{
 " https://github.com/majutsushi/tagbar
