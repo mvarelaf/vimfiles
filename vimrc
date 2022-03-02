@@ -61,7 +61,7 @@ function! PackagerInit() abort
 
   "Loaded only for specific filetypes on demand. Requires autocommands below.
   call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
-  call packager#add('tpope/vim-markdown', { 'type': 'opt' })
+  " call packager#add('tpope/vim-markdown', { 'type': 'opt' })
   call packager#add('masukomi/vim-markdown-folding', { 'type': 'opt' })
   " call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
   " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
@@ -402,7 +402,7 @@ nnoremap <leader>b :Bufselect<CR>
 "" }}}
 
 "" FILESELECT https://github.com/yegappan/fileselect {{{
-nmap <F4> <Plug>Fileselect_Toggle
+nmap <F4> <Plug>(FileselectToggle)
 nnoremap <leader>f :Fileselect<CR>
 "" }}}
 
@@ -424,6 +424,8 @@ let g:markdown_fenced_languages = ['sql']
 " from upstream https://github.com/masukomi/vim-markdown-folding
 let g:markdown_fold_indent_title = 1
 "" }}}
+
+colorscheme fight-in-the-shade
 
 set noshowmode
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
@@ -491,6 +493,7 @@ endif
 
 " Add full path and buffer number to Ctrl-G display
 nnoremap <C-g> 2<C-g>
+" ga shows info of character under sursor
 
 " Highlight all occurrences of current word without moving
 " nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
@@ -650,6 +653,7 @@ endfunction
 " after/plugin/startify.vim
 nnoremap <silent> <leader>s :split<bar>Startify<cr>
 nnoremap <silent> <leader>v :vsplit<bar>Startify<cr>
+nnoremap <silent> <leader>t :tabnew<bar>Startify<cr>
 
 "" TAGBAR https://github.com/preservim/tagbar {{{
 " https://github.com/majutsushi/tagbar

@@ -5,7 +5,9 @@
 " colorscheme hybrid
 " colorscheme moody
 " colorscheme Tomorrow-Night
+" colorscheme tolerable "light theme AirlineTheme solarized
 " colorscheme simplon "light theme AirlineTheme silver
+" colorscheme sourcerer "AirLineTheme badwolf ó bubblegum
 colorscheme manuscript
 set background=dark
 
