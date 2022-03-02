@@ -11,6 +11,21 @@ if exists("g:skip_loading_mswin") && g:skip_loading_mswin
   finish
 endif
 
+" https://github.com/microsoft/terminal/issues/8560
+if &term =~ "win32" && has('cursorshape')
+  let &t_SI = "\<Esc>[5 q" "INSERT mode
+  let &t_SR = "\<Esc>[3 q" "REPLACE mode
+  let &t_EI = "\<Esc>[2 q" "NORMAL mode
+endif
+" https://vim.fandom.com/wiki/Change_cursor_shape_in_different_modes
+"Cursor settings:
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+
 " set the 'cpoptions' to its Vim default
 if 1	" only do this when compiled with expression evaluation
   let s:save_cpo = &cpoptions
@@ -114,13 +129,25 @@ inoremap <C-F4> <C-O><C-W>c
 cnoremap <C-F4> <C-C><C-W>c
 onoremap <C-F4> <C-C><C-W>c
 
+" Move to window
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Right> <C-W>l
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Down> <C-W>j
+
+inoremap <C-Left> <C-O><C-W>h
+inoremap <C-Right> <C-O><C-W>l
+inoremap <C-Up> <C-O><C-W>k
+inoremap <C-Down> <C-O><C-W>j
+
+
 if has("gui")
   " CTRL-F is the search dialog
   " noremap  <expr> <C-F> has("gui_running") ? ":promptfind\<CR>" : "/"
   " inoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-O>:promptfind\<CR>" : "\<C-\>\<C-O>/"
   " cnoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-C>:promptfind\<CR>" : "\<C-\>\<C-O>/"
-  noremap  <expr> <C-F> "/\\v"
-  inoremap <expr> <C-F> "\<C-\>\<C-O>/\\v"
+  noremap  <expr> <C-F> "/\\v<C-Left>"
+  inoremap <expr> <C-F> "\<C-\>\<C-O>/\\v<C-Left>"
 
   " CTRL-H is the replace dialog,
   " but in console, it might be backspace, so don't map it there
