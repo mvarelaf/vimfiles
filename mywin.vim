@@ -1,7 +1,7 @@
 " Set options and add mapping such that Vim behaves a lot like MS-Windows
 "
 " Maintainer:	Miguel Varela
-" Last Change:	sábado 25 abril 2020
+" Last Change:	jueves 03 marzo 2022
 " Adapted from $VIMRUNTIME/mswin.vim
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
 " Last Change:	2018 Dec 07
@@ -117,11 +117,12 @@ onoremap <C-E> <C-C>gggH<C-O>G
 snoremap <C-E> <C-C>gggH<C-O>G
 xnoremap <C-E> <C-C>ggVG
 
-" CTRL-Tab is Next window
-noremap <C-Tab> <C-W>w
-inoremap <C-Tab> <C-O><C-W>w
-cnoremap <C-Tab> <C-C><C-W>w
-onoremap <C-Tab> <C-C><C-W>w
+" " CTRL-Tab is Next window
+" " do not redefine default: Go to previous (last accessed) tab page.
+" noremap <C-Tab> <C-W>w
+" inoremap <C-Tab> <C-O><C-W>w
+" cnoremap <C-Tab> <C-C><C-W>w
+" onoremap <C-Tab> <C-C><C-W>w
 
 " CTRL-F4 is Close window
 noremap <C-F4> <C-W>c
@@ -140,6 +141,15 @@ inoremap <C-Right> <C-O><C-W>l
 inoremap <C-Up> <C-O><C-W>k
 inoremap <C-Down> <C-O><C-W>j
 
+" Jump to window <n>:
+" http://stackoverflow.com/a/6404246/151007
+for i in range(1, 9)
+  execute 'nnoremap <silent> <Leader>'.i.' :'.i.'wincmd w<CR>'
+  execute 'nnoremap <silent> <A-'.i.'> :'.i.'wincmd w<CR>'
+endfor
+" Jump to previous window:
+nnoremap <silent> <Leader>0 :wincmd p<CR>
+nnoremap <silent> <A-0> :wincmd p<CR>
 
 if has("gui")
   " CTRL-F is the search dialog

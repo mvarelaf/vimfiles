@@ -56,6 +56,7 @@ function! PackagerInit() abort
   call packager#add('yegappan/fileselect')
   call packager#add('preservim/tagbar')
   call packager#add('AndrewRadev/quickpeek.vim')
+  call packager#add('dhruvasagar/vim-table-mode')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
