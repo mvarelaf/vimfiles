@@ -57,6 +57,7 @@ function! PackagerInit() abort
   call packager#add('preservim/tagbar')
   call packager#add('AndrewRadev/quickpeek.vim')
   call packager#add('dhruvasagar/vim-table-mode')
+  call packager#add('junegunn/vim-easy-align')
   "call packager#add('')
   "call packager#local('~/my_vim_plugins/my_awesome_plugin')
 
@@ -665,3 +666,13 @@ nmap <F12> :TagbarToggle<CR>
 " let g:quickpeek_auto = v:true
 let g:quickpeek_window_settings = []
 "" }}}
+
+"" VIM-EASY-ALIGN https://github.com/junegunn/vim-easy-align {{{
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+xmap <Leader>ga <Plug>(LiveEasyAlign)
+"" }}}
+
