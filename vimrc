@@ -54,7 +54,7 @@ function! PackagerInit() abort
   call packager#add('ryanoasis/vim-devicons')
   call packager#add('yegappan/bufselect')
   call packager#add('yegappan/fileselect')
-  call packager#add('preservim/tagbar')
+  call packager#add('preservim/tagbar', { 'type': 'opt' })
   call packager#add('AndrewRadev/quickpeek.vim')
   call packager#add('dhruvasagar/vim-table-mode')
   call packager#add('junegunn/vim-easy-align')
@@ -81,6 +81,7 @@ augroup packager_filetype
   autocmd!
   autocmd FileType markdown packadd vim-markdown
   autocmd FileType markdown packadd vim-markdown-folding
+  autocmd FileType markdown packadd tagbar
   " autocmd FileType csv packadd csv.vim
   " autocmd FileType racket packadd vim-racket
   " autocmd FileType racket,scheme,lisp packadd vim-parinfer
