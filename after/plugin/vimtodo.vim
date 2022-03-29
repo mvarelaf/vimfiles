@@ -5,30 +5,4 @@
 let g:todo_states=[['TODO(t)', '|', 'DONE(d)'],
       \['START(s)', 'END(e)', 'CLOSED(l)' ],
       \['WAITING(w)', 'HOLD(h)', 'INPROGRESS(i)', 'SOMEDAY(y)', 'CANCELLED(c)']]
-
-if &background == 'dark'
-  let g:todo_state_colors= {
-    \'TODO': 'Yellow',
-    \'DONE': 'Green',
-    \'CANCELLED': 'Red',
-    \'STOP': 'Grey',
-    \'START': 'Cyan',
-    \'WAITING': 'Brown',
-    \'HOLD': 'Grey',
-    \'INPROGRESS': 'Cyan',
-    \'SOMEDAY': 'Grey',
-    \'CLOSED': 'Grey'}
-else
-  let g:todo_state_colors= {
-    \'TODO': 'Blue',
-    \'DONE': 'Green',
-    \'CANCELLED': 'Red',
-    \'STOP': 'Grey',
-    \'START': 'Cyan',
-    \'WAITING': 'Brown',
-    \'HOLD': 'Grey',
-    \'INPROGRESS': 'Cyan',
-    \'SOMEDAY': 'Grey',
-    \'CLOSED': 'Grey'}
-endif
 ""}}}
