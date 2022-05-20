@@ -309,9 +309,10 @@ let g:netrw_liststyle = 3 " show subfolders as ascii tree
 "" }}}
 
 "" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
-" set shortmess+=c    " Shut off completion messages
+set shortmess+=c    " Shut off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#completion_delay = 1000 " 1 second
+
+" let g:mucomplete#completion_delay = 1000 " 1 second
 
 " let g:mucomplete#chains = { 'sql' : ['file', 'sqla', 'keyn'] }
 let g:mucomplete#chains = { 'sql' : ['file', 'keyn'] }

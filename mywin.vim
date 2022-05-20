@@ -93,7 +93,9 @@ inoremap <C-Z> <C-O>u
 
 " CTRL-Y is Redo (although not repeat); not in cmdline though
 noremap <C-Y> <C-R>
-inoremap <C-Y> <C-O><C-R>
+" conflict with *popupmenu-completion* Accept currently selected match
+" inoremap <C-Y> <C-O><C-R>
+inoremap <C-Y> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>C-O>\<lt>C-R>"<CR>
 
 " Alt-Space is System menu
 if has("gui")
@@ -112,7 +114,9 @@ endif
 
 " CTRL-E is Select all
 noremap <C-E> gggH<C-O>G
-inoremap <C-E> <C-O>gg<C-O>gH<C-O>G
+" conflicts with *popupmenu-completion* End completion
+" inoremap <C-E> <C-O>gg<C-O>gH<C-O>G
+inoremap <C-E> <C-R>=pumvisible() ? "\<lt>C-E>" : "\<lt>C-O>gg\<lt>C-O>gH\<lt>C-O>G"<CR>
 onoremap <C-E> <C-C>gggH<C-O>G
 snoremap <C-E> <C-C>gggH<C-O>G
 xnoremap <C-E> <C-C>ggVG
