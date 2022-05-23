@@ -7,15 +7,13 @@
 " colorscheme Tomorrow-Night
 " colorscheme tolerable "light theme AirlineTheme solarized
 " colorscheme simplon "light theme AirlineTheme silver
-" colorscheme sourcerer "AirLineTheme badwolf ó bubblegum
+" colorscheme sourcerer "AirLineTheme badwolf or bubblegum
 colorscheme manuscript
-set background=dark
+let g:airline_theme='hybrid'
+" colorscheme saturnite
+" let g:airline_theme='badwolf' "'base16_helios' "jet
 
-" if g:machine == 'CAPRICA'
-"   set background=dark
-" else
-"   set background=light
-" endif
+set background=dark
 
 " set guicursor=a:blinkon0  " No blinking cursor in all modes
 " set guicursor=n:blinkon0  " No blinking cursor, only in normal mode
