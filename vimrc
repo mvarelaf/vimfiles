@@ -29,67 +29,37 @@ let g:loaded_tarPlugin = 1
 " let g:loaded_2html_plugin = 1
 " let g:loaded_netrwPlugin = 1
 
-""" PACKAGER https://github.com/kristijanhusak/vim-packager {{{
-" based on https://github.com/k-takata/minpac
+call plug#begin()
+Plug 'mattn/calendar-vim'
+Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-sayonara'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mivok/vimtodo'
+Plug 'vimwiki/vimwiki'
+Plug 'flazz/vim-colorschemes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'yegappan/bufselect'
+Plug 'yegappan/fileselect'
+Plug 'preservim/tagbar', { 'for': 'markdown' }
+Plug 'AndrewRadev/quickpeek.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'junegunn/vim-easy-align'
 
-" Load packager only when you need it
-function! PackagerInit() abort
-  packadd vim-packager
-  call packager#init()
-  call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
-  call packager#add('mattn/calendar-vim')
-  call packager#add('mhinz/vim-startify')
-  call packager#add('mhinz/vim-sayonara')
-  call packager#add('lifepillar/vim-mucomplete')
-  call packager#add('tpope/vim-surround')
-  call packager#add('tpope/vim-repeat')
-  call packager#add('tpope/vim-unimpaired')
-  call packager#add('tpope/vim-commentary')
-  call packager#add('tpope/vim-fugitive')
-  call packager#add('vim-airline/vim-airline')
-  call packager#add('vim-airline/vim-airline-themes')
-  call packager#add('mivok/vimtodo')
-  call packager#add('vimwiki/vimwiki')
-  call packager#add('flazz/vim-colorschemes')
-  call packager#add('ryanoasis/vim-devicons')
-  call packager#add('yegappan/bufselect')
-  call packager#add('yegappan/fileselect')
-  call packager#add('preservim/tagbar', { 'type': 'opt' })
-  call packager#add('AndrewRadev/quickpeek.vim')
-  call packager#add('dhruvasagar/vim-table-mode')
-  call packager#add('junegunn/vim-easy-align')
-  "call packager#add('')
-  "call packager#local('~/my_vim_plugins/my_awesome_plugin')
-
-  "Loaded only for specific filetypes on demand. Requires autocommands below.
-  call packager#add('chrisbra/csv.vim', { 'type': 'opt' })
-  " call packager#add('tpope/vim-markdown', { 'type': 'opt' })
-  call packager#add('masukomi/vim-markdown-folding', { 'type': 'opt' })
-  " call packager#add('wlangstroth/vim-racket', { 'type': 'opt' })
-  " call packager#add('bhurlow/vim-parinfer', { 'type': 'opt' })
-  " call packager#add('jpalardy/vim-slime', { 'type': 'opt' })
-  " call packager#add('jalvesaq/Nvim-R', { 'type': 'opt', 'branch': 'stable' })
-endfunction
-
-command! PackagerInstall call PackagerInit() | call packager#install()
-command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'force_hooks': '<bang>' })
-command! PackagerClean call PackagerInit() | call packager#clean()
-command! PackagerStatus call PackagerInit() | call packager#status()
-
-"Load plugins only for specific filetype
-augroup packager_filetype
-  autocmd!
-  autocmd FileType markdown packadd vim-markdown
-  autocmd FileType markdown packadd vim-markdown-folding
-  autocmd FileType markdown packadd tagbar
-  " autocmd FileType csv packadd csv.vim
-  " autocmd FileType racket packadd vim-racket
-  " autocmd FileType racket,scheme,lisp packadd vim-parinfer
-  " autocmd FileType racket,scheme,lisp packadd vim-slime
-  " autocmd FileType r packadd Nvim-R
-augroup END
-
-""" }}}
+Plug 'chrisbra/csv.vim', { 'on': [] }
+" call plug#load('csv.vim')
+Plug 'mvarelaf/vim-markdown-folding', { 'for': 'markdown' }
+" Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
+" Plug 'bhurlow/vim-parinfer', { 'for': ['racket', 'scheme', 'lisp'] }
+" Plug 'jpalardy/vim-slime', { 'for': ['racket', 'scheme', 'lisp'] }
+" Plug 'jalvesaq/Nvim-R', { 'for': 'r', 'branch': 'stable' }
+call plug#end()
 
 "" My SANE defaults {{{
 

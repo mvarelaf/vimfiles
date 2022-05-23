@@ -2,6 +2,7 @@
 spell/
 startify-sessions/
 pack/
+plugged/
 .netrwhist
 
 ## Vim swap files
