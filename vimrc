@@ -565,6 +565,11 @@ augroup END
   autocmd QuickFixCmdPost [^l]*grep* cwindow
   autocmd QuickFixCmdPost l*grep* lwindow
   augroup END
+
+  augroup niceties
+    autocmd!
+    autocmd VimResized * wincmd =
+  augroup END
 endif
 "" }}}
 
