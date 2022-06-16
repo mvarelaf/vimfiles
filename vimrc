@@ -134,6 +134,8 @@ if empty(mapcheck('<C-W>', 'i'))
 endif
 "" END OF ADAPTED FROM https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim }}}
 
+set cmdheight=2
+
 set showcmd
 set hidden
 
