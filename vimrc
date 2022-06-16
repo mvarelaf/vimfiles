@@ -33,7 +33,7 @@ call plug#begin()
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
-Plug 'lifepillar/vim-mucomplete'
+Plug 'ackyshake/VimCompletesMe'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -200,7 +200,8 @@ set nojoinspaces " Use only 1 space after "." when joining lines, not 2
 
 if has('insert_expand')
   " set completeopt=menuone,noinsert,noselect
-  set completeopt=menuone,noinsert,preview "menu,preview "is the default
+  " set completeopt=menuone,noinsert,preview "menu,preview "is the default
+  set completeopt=menuone,preview "menu,preview "is the default
 endif
 
 if has('mksession')
@@ -279,24 +280,7 @@ let g:netrw_liststyle = 3 " show subfolders as ascii tree
 
 "" }}}
 
-"" MUCOMPLETE https://github.com/lifepillar/vim-mucomplete {{{
-set shortmess+=c    " Shut off completion messages
-let g:mucomplete#enable_auto_at_startup = 1
-
-" let g:mucomplete#completion_delay = 1000 " 1 second
-
-" let g:mucomplete#chains = { 'sql' : ['file', 'sqla', 'keyn'] }
-let g:mucomplete#chains = { 'sql' : ['file', 'keyn'] }
-
-function! MU()
-  if exists("g:loaded_mucomplete")
-    return get(g:mucomplete#msg#short_methods,
-        \      get(g:, 'mucomplete_current_method', ''), '')
-    else
-      return ''
-    endif
-endf
-""" }}}
+inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
 
 "" Abbreviations {{{
 iab _hoy <C-R>=strftime("%d.%m.%Y")<CR>
