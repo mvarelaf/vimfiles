@@ -285,13 +285,13 @@ let g:netrw_liststyle = 3 " show subfolders as ascii tree
 inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
 
 "" Abbreviations {{{
-iab _hoy <C-R>=strftime("%d.%m.%Y")<CR>
-iab _time <C-R>=strftime("%H:%M:%S")<CR>
-iab _dates <C-R>=strftime("%d/%m/%Y %H:%M")<CR>
-"iab _fecha <C-R>=strftime("%a %b %d %T %Z %Y")<CR>
-iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR>
-iab _iso_date <C-R>=strftime("%FT%T%z")<CR>
-iab _rfc_date <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+iab _hoy <C-R>=strftime("%d.%m.%Y")<CR><C-R>=Eatchar('\s')<CR>
+iab _time <C-R>=strftime("%H:%M:%S")<CR><C-R>=Eatchar('\s')<CR>
+iab _dates <C-R>=strftime("%d/%m/%Y %H:%M")<CR><C-R>=Eatchar('\s')<CR>
+"iab _fecha <C-R>=strftime("%a %b %d %T %Z %Y")<CR><C-R>=Eatchar('\s')<CR>
+iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR><C-R>=Eatchar('\s')<CR>
+iab _iso_date <C-R>=strftime("%FT%T%z")<CR><C-R>=Eatchar('\s')<CR>
+iab _rfc_date <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=Eatchar('\s')<CR>
 
 " Too many mistakes
 cabbrev W   w
