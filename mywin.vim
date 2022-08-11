@@ -1,7 +1,6 @@
 " Set options and add mapping such that Vim behaves a lot like MS-Windows
 "
 " Maintainer:	Miguel Varela
-" Last Change:	jueves 03 marzo 2022
 " Adapted from $VIMRUNTIME/mswin.vim
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
 " Last Change:	2018 Dec 07
@@ -145,6 +144,16 @@ inoremap <C-Right> <C-O><C-W>l
 inoremap <C-Up> <C-O><C-W>k
 inoremap <C-Down> <C-O><C-W>j
 
+" Move window
+nnoremap çh <C-W>H
+nnoremap çl <C-W>L
+nnoremap çk <C-W>K
+nnoremap çj <C-W>J
+
+" Equal size
+nnoremap ç0 <C-W>=
+nnoremap çñ <C-W>=
+
 " Jump to window <n>:
 " http://stackoverflow.com/a/6404246/151007
 for i in range(1, 9)
@@ -155,20 +164,12 @@ endfor
 nnoremap <silent> <Leader>0 :wincmd p<CR>
 nnoremap <silent> <A-0> :wincmd p<CR>
 
+" CTRL-F is the search dialog also in console mode
 noremap  <expr> <C-F> "/\\v<C-Left>"
 inoremap <expr> <C-F> "\<C-\>\<C-O>/\\v<C-Left>"
-" if has("gui")
-  " CTRL-F is the search dialog
-  " noremap  <expr> <C-F> has("gui_running") ? ":promptfind\<CR>" : "/"
-  " inoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-O>:promptfind\<CR>" : "\<C-\>\<C-O>/"
-  " cnoremap <expr> <C-F> has("gui_running") ? "\<C-\>\<C-C>:promptfind\<CR>" : "\<C-\>\<C-O>/"
 
-  " CTRL-H is the replace dialog,
-  " but in console, it might be backspace, so don't map it there
-  " nnoremap <expr> <C-H> has("gui_running") ? ":promptrepl\<CR>" : "\<C-H>"
-  " inoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-O>:promptrepl\<CR>" : "\<C-H>"
-  " cnoremap <expr> <C-H> has("gui_running") ? "\<C-\>\<C-C>:promptrepl\<CR>" : "\<C-H>"
-" endif
+" CTRL-H is the replace dialog
+nnoremap <C-H> :%s/<C-R>=expand("<cword>")<CR>//gc<Left><Left><Left>
 
 " restore 'cpoptions'
 set cpo&
