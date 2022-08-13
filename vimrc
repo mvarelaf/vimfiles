@@ -379,7 +379,7 @@ nnoremap <leader>f :Fileselect<CR>
 "" }}}
 
 if has('autocmd')
-  if has('gui')
+  if has('gui') && !&diff
     augroup cursor_line
       autocmd!
       au VimEnter * set cursorline
