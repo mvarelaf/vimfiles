@@ -8,8 +8,9 @@
 " colorscheme tolerable "light theme AirlineTheme solarized
 " colorscheme simplon "light theme AirlineTheme silver
 " colorscheme sourcerer "AirLineTheme badwolf or bubblegum
-colorscheme manuscript
-let g:airline_theme='hybrid'
+" colorscheme manuscript
+colorscheme habamax
+let g:airline_theme='deus'
 " colorscheme saturnite
 " let g:airline_theme='badwolf' "'base16_helios' "jet
 

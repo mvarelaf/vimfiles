@@ -403,7 +403,11 @@ let g:markdown_fenced_languages = ['sql']
 let g:markdown_fold_indent_title = 1
 "" }}}
 
-colorscheme desert
+try
+  colorscheme habamax "Included into vim 9.0.133
+catch /^Vim\%((\a\+)\)\=:E185:/
+  colorscheme desert
+endtry
 
 set noshowmode
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
