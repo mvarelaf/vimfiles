@@ -251,7 +251,13 @@ endif
 
 set number
 set relativenumber
-set signcolumn="number"
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " Show @@@ in the last line if it is truncated.
 if v:version > 704
