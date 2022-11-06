@@ -51,6 +51,8 @@ Plug 'preservim/tagbar', { 'for': 'markdown' }
 Plug 'AndrewRadev/quickpeek.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'junegunn/vim-easy-align'
+Plug 'habamax/vim-select'
+Plug 'habamax/vim-select-more'
 
 Plug 'chrisbra/csv.vim', { 'on': [] }
 " call plug#load('csv.vim')
@@ -376,12 +378,12 @@ nnoremap <leader>ls :ls<CR>:b<space>
 
 "" BUFSELECT https://github.com/yegappan/bufselect {{{
 nmap <F2> <Plug>Bufselect_Toggle
-nnoremap <leader>b :Bufselect<CR>
+nnoremap <leader>j :Bufselect<CR>
 "" }}}
 
 "" FILESELECT https://github.com/yegappan/fileselect {{{
 nmap <F4> <Plug>(FileselectToggle)
-nnoremap <leader>f :Fileselect<CR>
+" nnoremap <leader>f :Fileselect<CR>
 "" }}}
 
 if has('autocmd')
@@ -667,3 +669,10 @@ nmap ga <Plug>(EasyAlign)
 xmap <Leader>ga <Plug>(LiveEasyAlign)
 "" }}}
 
+"" VIM-SELECT https://github.com/habamax/vim-select {{{
+" see mappings in ~/vimfiles/after/plugin/select.vim
+
+let g:airline_filetype_overrides = {
+      \ 'selectresults': [ '%#Statusline#%{select#statusline_type()}', '%{select#statusline_progress()}' ],
+      \ }
+"" }}}

@@ -4,6 +4,7 @@ startify-sessions/
 pack/
 plugged/
 .netrwhist
+.selectprojects
 
 ## Vim swap files
 *.swp
