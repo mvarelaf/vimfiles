@@ -40,10 +40,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'mivok/vimtodo'
 Plug 'vimwiki/vimwiki'
-Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'yegappan/bufselect'
 Plug 'yegappan/fileselect'
@@ -415,9 +413,7 @@ set noshowmode
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 if has('gui')
   let g:airline_powerline_fonts = 1
-  let g:airline_theme='hybrid'
 else
-  let g:airline_theme='deus'
   let g:airline_symbols_ascii = 1
 endif
 

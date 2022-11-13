@@ -1,18 +1,7 @@
 " Adapted from https://www.vim.org/scripts/script.php?script_id=2188
-" colorscheme earendel_old
 
-" colorscheme freya
-" colorscheme hybrid
-" colorscheme moody
-" colorscheme Tomorrow-Night
-" colorscheme tolerable "light theme AirlineTheme solarized
-" colorscheme simplon "light theme AirlineTheme silver
-" colorscheme sourcerer "AirLineTheme badwolf or bubblegum
-" colorscheme manuscript
-colorscheme habamax
-let g:airline_theme='deus'
-" colorscheme saturnite
-" let g:airline_theme='badwolf' "'base16_helios' "jet
+colorscheme highlight
+let g:airline_theme='distinguido'
 
 set background=dark
 
