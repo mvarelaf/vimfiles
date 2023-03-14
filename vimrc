@@ -33,7 +33,7 @@ call plug#begin()
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-sayonara'
-Plug 'ackyshake/VimCompletesMe'
+Plug 'ackyshake/VimCompletesMe', { 'frozen' : 1 }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
