@@ -9,8 +9,9 @@ let g:startify_skiplist = [
 
 let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
 
+let g:startify_custom_header = []
+
 if g:machine =~ 'E3000*'
-  let g:startify_custom_header = []
   let g:startify_bookmarks = [
         \ {'l': expand("$USERPROFILE").'\Documents\notas\links.txt' },
         \ {'p': expand("$USERPROFILE").'\Desktop\INFOP.txt' },
