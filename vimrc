@@ -401,6 +401,7 @@ endif
 " Add full path and buffer number to Ctrl-G display
 nnoremap <C-g> 2<C-g>
 " ga shows info of character under sursor
+" or use :as[cii] because ga is used for EasyAlign
 
 " Highlight all occurrences of current word without moving
 " nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
