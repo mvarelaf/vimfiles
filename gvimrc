@@ -1,4 +1,4 @@
-colorscheme highlight
+colorscheme realce
 
 set background=dark
 
