@@ -1,5 +1,3 @@
-" Adapted from https://www.vim.org/scripts/script.php?script_id=2188
-
 colorscheme highlight
 let g:airline_theme='distinguido'
 
@@ -13,6 +11,8 @@ set guioptions-=T " get rid of GUI buttons
 set guioptions-=r " get rid of right scroll
 set guioptions-=L " get rid of left scroll when vertical split
 set guioptions+=! " External commands are executed in a terminal window
+set guioptions-=t " No tearoff menu items
+set guioptions-=e " Use non-GUI tab pages
 
 set guifont=SauceCodePro_NF:h9
 " set guifont=Consolas:h10
