@@ -1,5 +1,4 @@
 colorscheme highlight
-let g:airline_theme='distinguido'
 
 set background=dark
 
