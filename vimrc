@@ -40,6 +40,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
 Plug 'vim-airline/vim-airline'
 Plug 'mivok/vimtodo'
 Plug 'vimwiki/vimwiki'
@@ -69,16 +70,11 @@ set cmdheight=2
 set showcmd
 set hidden
 
-set expandtab    " use spaces, not tabs
-
 set hlsearch
 set ignorecase
 set smartcase
 
 set infercase
-
-set copyindent
-set smartindent
 
 set clipboard=unnamed
 
@@ -463,28 +459,17 @@ cabbrev ESearch
 
 "" AUTOCMD {{{
 if has('autocmd')
-  augroup fileTypes
-  autocmd!
-  autocmd Filetype outlaw setlocal tabstop=2 shiftwidth=2
-  autocmd Filetype todo setlocal tabstop=2 shiftwidth=2
-  autocmd FileType vim setlocal tabstop=2 shiftwidth=2 textwidth=79
-  autocmd FileType xml setlocal tabstop=3 noexpandtab shiftwidth=3
-  autocmd FileType json setlocal tabstop=3 noexpandtab shiftwidth=3
-  autocmd FileType text setlocal tabstop=2 shiftwidth=2 textwidth=79 syntax=txt
-  autocmd FileType markdown compiler pandoc
-  autocmd FileType markdown setlocal conceallevel=2
-  if has('file_in_path')
-    autocmd FileType markdown setlocal suffixesadd=.md,.markdown
-  endif
-  autocmd FileType racket setlocal tabstop=2 shiftwidth=2 commentstring=;;%s
-  " Some file types use real tabs
-  autocmd FileType make setlocal noexpandtab
-  autocmd FileType gitconfig setlocal noexpandtab
-  " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-  autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-  autocmd FileType c setlocal noexpandtab cinoptions=:0,l1,t0,g0,(0
-  autocmd FileType sql let g:omni_sql_no_default_maps = 1
-augroup END
+   augroup fileTypes
+     autocmd!
+     autocmd FileType text setlocal textwidth=79 syntax=txt
+     autocmd FileType markdown compiler pandoc
+     if has('file_in_path')
+       autocmd FileType markdown setlocal suffixesadd=.md,.markdown
+     endif
+     autocmd FileType racket setlocal commentstring=;;%s
+     autocmd FileType c,cpp setlocal cinoptions=:0,l1,t0,g0,(0
+     autocmd FileType sql let g:omni_sql_no_default_maps = 1
+   augroup END
 
   augroup vimrcEx
   autocmd!
