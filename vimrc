@@ -342,6 +342,14 @@ elseif has('linux')
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 endif
 
+if has('autocmd')
+  augroup my_airline
+    autocmd!
+    autocmd User AirlineToggledOn set shortmess+=S
+    autocmd User AirlineToggledOff set shortmess-=S " show search count message, e.g. [1/5]"
+  augroup END
+endif
+
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#branch#vcs_checks = ['untracked']
