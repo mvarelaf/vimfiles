@@ -76,6 +76,8 @@ set smartcase
 
 set infercase
 
+set smartindent
+
 set clipboard=unnamed
 
 set matchpairs=(:),{:},[:],<:> "for use with % key
