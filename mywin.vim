@@ -139,10 +139,31 @@ nnoremap <C-Right> <C-W>l
 nnoremap <C-Up> <C-W>k
 nnoremap <C-Down> <C-W>j
 
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+
 inoremap <C-Left> <C-O><C-W>h
 inoremap <C-Right> <C-O><C-W>l
 inoremap <C-Up> <C-O><C-W>k
 inoremap <C-Down> <C-O><C-W>j
+
+" Move to window
+nnoremap <A-Left> <C-W>h
+nnoremap <A-Right> <C-W>l
+nnoremap <A-Up> <C-W>k
+nnoremap <A-Down> <C-W>j
+
+nnoremap <A-h> <C-W>h
+nnoremap <A-l> <C-W>l
+nnoremap <A-k> <C-W>k
+nnoremap <A-j> <C-W>j
+
+inoremap <A-Left> <C-O><C-W>h
+inoremap <A-Right> <C-O><C-W>l
+inoremap <A-Up> <C-O><C-W>k
+inoremap <A-Down> <C-O><C-W>j
 
 " Move window
 nnoremap çh <C-W>H
@@ -159,10 +180,12 @@ nnoremap çñ <C-W>=
 for i in range(1, 9)
   execute 'nnoremap <silent> <Leader>'.i.' :'.i.'wincmd w<CR>'
   execute 'nnoremap <silent> <A-'.i.'> :'.i.'wincmd w<CR>'
+  execute 'nnoremap <silent> ç'.i.' :'.i.'wincmd w<CR>'
 endfor
 " Jump to previous window:
 nnoremap <silent> <Leader>0 :wincmd p<CR>
 nnoremap <silent> <A-0> :wincmd p<CR>
+nnoremap <silent> çç :wincmd p<CR>
 
 " CTRL-F is the search dialog also in console mode
 noremap  <expr> <C-F> "/\\v<C-Left>"
