@@ -499,6 +499,9 @@ if has('autocmd')
   " The following autocommand will cause the quickfix window to open after any grep invocation:
   autocmd QuickFixCmdPost [^l]*grep* cwindow
   autocmd QuickFixCmdPost l*grep* lwindow
+
+  " and load cfilter plugin
+  autocmd QuickFixCmdPost * packadd cfilter
   augroup END
 
   augroup niceties
