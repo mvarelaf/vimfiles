@@ -139,11 +139,6 @@ nnoremap <C-Right> <C-W>l
 nnoremap <C-Up>    <C-W>k
 nnoremap <C-Down>  <C-W>j
 
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-nnoremap <C-k> <C-W>k
-nnoremap <C-j> <C-W>j
-
 inoremap <C-Left>  <C-O><C-W>h
 inoremap <C-Right> <C-O><C-W>l
 inoremap <C-Up>    <C-O><C-W>k
