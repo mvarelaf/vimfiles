@@ -392,6 +392,7 @@ call airline#add_inactive_statusline_func('WindowNumber')
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_count = 0
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#tabs_label = ''
