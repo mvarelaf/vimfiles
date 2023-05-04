@@ -43,7 +43,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
 Plug 'vim-airline/vim-airline'
 Plug 'mivok/vimtodo'
-Plug 'vimwiki/vimwiki'
 Plug 'ryanoasis/vim-devicons'
 Plug 'yegappan/bufselect'
 Plug 'yegappan/fileselect'
@@ -249,43 +248,6 @@ endif
 "" SAYONARA https://github.com/mhinz/vim-sayonara {{{
 nnoremap <silent> <leader>q :Sayonara!<cr>
 nnoremap <silent> <leader>c :Sayonara<cr>
-"" }}}
-
-"" VIMWIKI https://github.com/vimwiki/vimwiki.git {{{
-if g:machine =~ 'E3000*'
-  let g:wikidocs = expand("$USERPROFILE").'\Documents\wiki'
-  let g:wikidocs0 = wikidocs.'\work\'
-  let g:wikidocs0_templates = wikidocs.'\work\templates\'
-  let g:wikidocs1 = wikidocs.'\vimwiki\'
-  let g:wikidocs2 = wikidocs.'\notas\'
-  let g:vimwiki_list = [{'path': wikidocs0,'index': 'work', 'nested_syntaxes': {'python': 'python', 'c++': 'cpp', 'sql': 'sql'},
-          \ 'template_path': wikidocs0_templates,
-          \ 'template_default': 'def_template',
-          \ 'template_ext': '.html',
-          \ 'auto_toc': 1},
-     \ {'path': wikidocs1},
-     \ {'path': wikidocs2,'index': 'mis_notas'}]
-endif
-          " \ 'template_default': 'article_template',
-
-let g:vimwiki_use_mouse = 1
-"let g:vimwiki_auto_checkbox = 0
-" Fold options are now global, not per g:vimwiki_list
-let g:vimwiki_folding = 'expr' " folds sections and code blocks
-let g:vimwiki_hl_cb_checked = 1 " Highlight [X] as comments
-let g:vimwiki_list_ignore_newline = 0 "Do make multiline lists
-let g:vimwiki_global_ext = 0 " No wikify by .ext outside defined directories
-"let g:vimwiki_menu = '' "No menu
-let g:vimwiki_browsers = ['C:\Program Files\Mozilla Firefox\firefox.exe']
-"let g:vimwiki_html_header_numbering = 1 "Numbered HTML headers
-"let g:vimwiki_html_header_numbering_sym = '.' "Numbers ending with .
-
-let g:vimwiki_toc_header = 'Índice'
-
-nmap <C-F3> :Vimwiki2HTML<CR>
-imap <C-F3> <Esc><C-F3>
-nmap <C-S-F3> :VimwikiAll2HTML<CR>
-imap <C-S-F3> <Esc><C-S-F3>
 "" }}}
 
 " Poor man bufexplorer
