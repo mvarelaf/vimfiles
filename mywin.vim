@@ -144,6 +144,11 @@ inoremap <C-Right> <C-O><C-W>l
 inoremap <C-Up>    <C-O><C-W>k
 inoremap <C-Down>  <C-O><C-W>j
 
+tnoremap <C-Left>  <C-W>h
+tnoremap <C-Right> <C-W>l
+tnoremap <C-Up>    <C-W>k
+tnoremap <C-Down>  <C-W>j
+
 " Move to window
 nnoremap <A-Left>  <C-W>h
 nnoremap <A-Right> <C-W>l
@@ -155,11 +160,21 @@ inoremap <A-Right> <C-O><C-W>l
 inoremap <A-Up>    <C-O><C-W>k
 inoremap <A-Down>  <C-O><C-W>j
 
+tnoremap <A-Left>  <C-W>h
+tnoremap <A-Right> <C-W>l
+tnoremap <A-Up>    <C-W>k
+tnoremap <A-Down>  <C-W>j
+
 " Move window
 nnoremap çh <C-W>H
 nnoremap çl <C-W>L
 nnoremap çk <C-W>K
 nnoremap çj <C-W>J
+
+tnoremap çh <C-W>H
+tnoremap çl <C-W>L
+tnoremap çk <C-W>K
+tnoremap çj <C-W>J
 
 " Equal size
 nnoremap ç0 <C-W>=
