@@ -12,14 +12,16 @@ set guioptions-=L " get rid of left scroll when vertical split
 set guioptions+=! " External commands are executed in a terminal window
 set guioptions-=t " No tearoff menu items
 set guioptions-=e " Use non-GUI tab pages
+set guioptions-=m " No Menu bar
 
 set guifont=SauceCodePro_NF:h9
 " set guifont=Consolas:h10
 
-" https://github.com/tomasiser/vim-code-dark
 if has('directx') && has('windows')
-  " set renderoptions=type:directx
-  set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
+  " from README.md https://github.com/tomasiser/vim-code-dark
+  " set renderoptions=type:directx,gamma:1.5,contrast:0.5,geom:1,renmode:5,taamode:1,level:0.5
+  "https://github.com/vim-airline/vim-airline/wiki/FAQ#can-i-get-better-font-rendering-in-windows-gvim
+  set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 endif
 
 set browsedir=buffer
