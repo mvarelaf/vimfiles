@@ -201,6 +201,7 @@ endif
 
 let g:netrw_gx='<cfile>:p' "expand full path
 let g:netrw_liststyle = 3 " show subfolders as ascii tree
+let g:netrw_browse_split = 3 " open file in vertical split
 
 "" }}}
 
@@ -365,7 +366,7 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 " }}}
 
-"https://vimways.org/2018/formatting-lists-with-vim/
+" Adapted from https://vimways.org/2018/formatting-lists-with-vim/
 if v:version > 703 || v:version == 703 && has('patch541')
   set formatoptions+=n " When formatting text, recognize numbered lists
   set formatlistpat=^\\s*                     " Optional leading whitespace
@@ -373,14 +374,12 @@ if v:version > 703 || v:version == 703 && has('patch541')
   set formatlistpat+=\\[({]\\?                " |  Optionally match opening punctuation
   set formatlistpat+=\\(                      " |  Start group
   set formatlistpat+=[0-9]\\+                 " |  |  Numbers
-  "set formatlistpat+=\\\|                     " |  |  or
-  "set formatlistpat+=[a-zA-Z]\\+              " |  |  Letters
   set formatlistpat+=\\)                      " |  End group
   set formatlistpat+=[\\]:.)}                 " |  Closing punctuation
   set formatlistpat+=]                        " End character class
   set formatlistpat+=\\s\\+                   " One or more spaces
   set formatlistpat+=\\\|                     " or
-  set formatlistpat+=^\\s*[-–+o*•]\\s\\+      " Bullet points
+  set formatlistpat+=^\\s*[-–+*•]\\s\\+      " Bullet points
 endif
 
 " Add full path and buffer number to Ctrl-G display
