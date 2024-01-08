@@ -96,8 +96,11 @@ set shortmess+=x    " x use "[dos]" instead of "[dos format]", "[unix]" instead 
 
 set suffixes+=.pyc,.pyo,.egg-info,.class
 
-" set wildmode=longest,full
-set wildmode=longest:list,full
+if v:version >= 900
+  set wildoptions=fuzzy,pum
+else
+  set wildmode=longest:list,full
+endif
 
 if has('wildignore')
   set wildignorecase
