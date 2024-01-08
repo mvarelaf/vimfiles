@@ -83,7 +83,7 @@ if $TERM =~ '256' || &t_Co >= 256 || has('gui_running')
   highlight FoldColumn        cterm=NONE       ctermfg=243   ctermbg=236   gui=NONE       guifg=#767676  guibg=#242424  guisp=NONE
   highlight Folded            cterm=NONE       ctermfg=243   ctermbg=237   gui=NONE       guifg=#767676  guibg=#3a3a3a  guisp=NONE
   highlight Ignore            cterm=NONE       ctermfg=236   ctermbg=NONE  gui=NONE       guifg=#242424  guibg=NONE     guisp=NONE
-  highlight IncSearch         cterm=NONE       ctermfg=237   ctermbg=243   gui=NONE       guifg=#3a3a3a  guibg=#767676  guisp=NONE
+  highlight IncSearch         cterm=NONE       ctermfg=237   ctermbg=68    gui=bold       guifg=#3a3a3a  guibg=#5f87d7  guisp=NONE
   highlight LineNr            cterm=NONE       ctermfg=243   ctermbg=236   gui=NONE       guifg=#767676  guibg=#242424  guisp=NONE
   highlight Macro             cterm=NONE       ctermfg=210   ctermbg=NONE  gui=NONE       guifg=#ff8787  guibg=NONE     guisp=NONE
   highlight MatchParen        cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
