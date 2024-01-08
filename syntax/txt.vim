@@ -97,9 +97,9 @@ syn keyword txtDebug DEBUG
     command -nargs=+ HiLink hi def link <args>
   endif
 
-  HiLink txtNumber              Number
+  HiLink txtNumber              Normal
   HiLink txtString              Normal
-  HiLink txtOperator            Operator
+  HiLink txtOperator            Normal
   HiLink txtCite                String
   HiLink txtComments            Comment
   HiLink txtComment             Comment
