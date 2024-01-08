@@ -14,7 +14,7 @@ set guioptions-=t " No tearoff menu items
 set guioptions-=e " Use non-GUI tab pages
 set guioptions-=m " No Menu bar
 
-set guifont=SauceCodePro_NF:h9
+set guifont=Hasklug_Nerd_Font_Mono:h9:cANSI:qDRAFT
 " set guifont=Consolas:h10
 
 if has('directx') && has('windows')
