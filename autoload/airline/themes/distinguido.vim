@@ -34,7 +34,7 @@ let s:R3 = [s:blue[1], s:innerbg[1], s:blue[0], s:innerbg[0]]
 
 " Inactive pane
 " let s:IA = [s:middle[1], s:innerbg[1], s:middle[3], s:innerbg[0]]
-let s:IA = [s:gray[1], '#303030', s:middle[3], s:innerbg[0]]
+let s:IA = [s:gray[1], s:outerfg[1], s:middle[3], s:innerbg[0]]
 
 let g:airline#themes#distinguido#palette = {}
 let g:airline#themes#distinguido#palette.accents = {
