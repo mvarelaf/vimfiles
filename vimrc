@@ -268,7 +268,7 @@ nmap <F4> <Plug>(FileselectToggle)
 "" }}}
 
 if has('autocmd')
-  if has('gui') && !&diff
+  if !&diff
     augroup cursor_line
       autocmd!
       au VimEnter * set cursorline
@@ -296,11 +296,7 @@ set noshowmode
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
 let g:airline_theme='distinguido'
 
-if has('gui')
-  let g:airline_powerline_fonts = 1
-else
-  let g:airline_symbols_ascii = 1
-endif
+let g:airline_powerline_fonts = 1
 
 if has('windows')
   let g:airline#parts#ffenc#skip_expected_string='utf-8[dos]'
@@ -490,10 +486,6 @@ endif
 
 runtime! mywin.vim
 runtime! statusline.vim
-
-if !has('gui')
-  let g:webdevicons_enable = 0
-endif
 
 if g:machine =~ 'E3000*'
   set pythonthreedll=$USERPROFILE\AppData\Local\Continuum\miniconda3\python37.dll
