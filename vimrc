@@ -55,7 +55,7 @@ Plug 'habamax/vim-select-more'
 
 Plug 'chrisbra/csv.vim', { 'on': [] }
 " call plug#load('csv.vim')
-Plug 'mvarelaf/vim-markdown-folding', { 'for': 'markdown' }
+Plug 'mvarelaf/vim-markdown-folding', { 'for': 'markdown', 'frozen': 1 }
 " Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 " Plug 'bhurlow/vim-parinfer', { 'for': ['racket', 'scheme', 'lisp'] }
 " Plug 'jpalardy/vim-slime', { 'for': ['racket', 'scheme', 'lisp'] }
