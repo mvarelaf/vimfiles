@@ -94,6 +94,8 @@ if $TERM =~ '256' || &t_Co >= 256 || has('gui_running')
   highlight PmenuSbar         cterm=NONE       ctermfg=NONE  ctermbg=237   gui=NONE       guifg=NONE     guibg=#3a3a3a  guisp=NONE
   highlight PmenuSel          cterm=NONE       ctermfg=221   ctermbg=237   gui=NONE       guifg=#ffd75f  guibg=#3a3a3a  guisp=NONE
   highlight PmenuThumb        cterm=NONE       ctermfg=NONE  ctermbg=243   gui=NONE       guifg=NONE     guibg=#767676  guisp=NONE
+  highlight PmenuKind         cterm=NONE       ctermfg=221   ctermbg=243   gui=NONE       guifg=#ffd75f  guibg=#767676  guisp=NONE
+  highlight PmenuKindSel      cterm=NONE       ctermfg=114   ctermbg=243   gui=NONE       guifg=#87d787  guibg=#767676  guisp=NONE
   highlight Question          cterm=NONE       ctermfg=68    ctermbg=NONE  gui=NONE       guifg=#5f87d7  guibg=NONE     guisp=NONE
   highlight QuickFixLine      cterm=underline  ctermfg=NONE  ctermbg=NONE  gui=underline  guifg=NONE     guibg=NONE     guisp=NONE
   highlight Search            cterm=NONE       ctermfg=237   ctermbg=243   gui=NONE       guifg=#3a3a3a  guibg=#767676  guisp=NONE
@@ -323,7 +325,7 @@ highlight! link  diffSubname                Comment
 highlight! link  fugitiveHash               Comment
 highlight! link  fugitiveModifier           TextRed
 highlight! link  fugitiveUnstagedModifier   TextRed
-highlight! link  fugitiveUntrackedModifier  TextRed
+highlight! link  fugitiveUntrackedModifier  Comment
 highlight! link  fugitiveStagedModifier     TextGreen
 
 " HTML
@@ -439,7 +441,7 @@ highlight! link  mailURL      TextBlue
 highlight! link  markdownError             Normal
 highlight! link  markdownCode              TextGreen
 highlight! link  markdownCodeBlock         TextGreen
-highlight! link  markdownHeadingDelimiter  TextBlue
+highlight! link  markdownHeadingDelimiter  Title
 
 " Vim
 " Highlighting conventional comment titles (e.g. Author, etc) is useful
@@ -471,6 +473,8 @@ highlight! link  vimUserAttrbCmplt  Normal
 " Vim Help
 " Highlighting tags you can <C-]> on is useful
 highlight! link  helpHyperTextJump  TextMagenta
+highlight! link  helpHeadLine       Title
+highlight! link  helpExample        Comment
 
 " Netrw
 " Stick to ls colors as close as possible
@@ -495,6 +499,10 @@ highlight! link  tmuxKey  Normal
 " i3
 highlight! link  i3ConfigVariableModifier  Normal
 highlight! link  i3ConfigString            String
+
+" selectresults
+highlight! link  SelectMatched             TextBlue
+
 """ END FT-SPECIFIC SYNTAX }}}
 
 " vim: fdm=marker:nowrap:tw=0
