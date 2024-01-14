@@ -206,6 +206,11 @@ let g:netrw_gx='<cfile>:p' "expand full path
 let g:netrw_liststyle = 3 " show subfolders as ascii tree
 let g:netrw_browse_split = 3 " open file in vertical split
 
+if has('syntax')
+  set spelllang=es,en
+  set spelloptions=camel
+endif
+
 "" }}}
 
 inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
@@ -276,6 +281,11 @@ if has('autocmd')
       au WinEnter,InsertLeave * set cursorline
     augroup END
   endif
+  augroup syntax
+    autocmd!
+    " Don't mark URL-like things as spelling errors
+    au BufReadPost * syn match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+  augroup END
 endif
 
 " Markdown
