@@ -442,6 +442,9 @@ highlight! link  markdownError             Normal
 highlight! link  markdownCode              TextGreen
 highlight! link  markdownCodeBlock         TextGreen
 highlight! link  markdownHeadingDelimiter  Title
+highlight! link  markdownH1                Title
+highlight! link  markdownH2                Title
+highlight! link  markdownH3                Title
 
 " Vim
 " Highlighting conventional comment titles (e.g. Author, etc) is useful
