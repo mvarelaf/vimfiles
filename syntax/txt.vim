@@ -66,7 +66,7 @@ syn region txtDelims    matchgroup=txtOperator start="<"        end=">"         
 syn region txtDelims    matchgroup=txtOperator start="{"        end="}"         contains=@txtContains,@txtAlwaysContains oneline
 syn region txtDelims    matchgroup=txtOperator start="\["       end="\]"        contains=@txtContains,@txtAlwaysContains oneline
 
-syn match txtLink       "\(http\|https\|ftp\)\(\w\|[\-&=,?\:\.\/]\)*"   contains=txtOperator
+syn match txtLink       "\(http\|https\|ftp\)\(\w\|[\-&=,?\:\.\/]\)*"   contains=txtOperator,@NoSpell
 
 " Basic smileys
 syn match txtSmile      "[:;=8][\-]\?\([(\/\\)\[\]]\+\|[OoPpDdFf]\+\)"

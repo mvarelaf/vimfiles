@@ -281,11 +281,6 @@ if has('autocmd')
       au WinEnter,InsertLeave * set cursorline
     augroup END
   endif
-  augroup syntax
-    autocmd!
-    " Don't mark URL-like things as spelling errors
-    au BufReadPost * syn match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
-  augroup END
 endif
 
 " Markdown
