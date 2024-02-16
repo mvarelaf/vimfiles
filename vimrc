@@ -211,6 +211,15 @@ if has('syntax')
   set spelloptions=camel
 endif
 
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+  set grepformat^=%f:%l:%c:%m
+endif
+
+" if executable('ugrep')
+"   set grepprg=ugrep\ -RInk\ -j\ -u\ --tabs=1\ --ignore-files
+"   set grepformat=%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\\|%l\\\|%c\\\|%m
+" endif
 "" }}}
 
 inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
