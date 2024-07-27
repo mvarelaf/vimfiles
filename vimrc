@@ -421,27 +421,18 @@ imap <Home> <C-o><Home>
 " imap <End> <C-o><End>
 
 "Inspired by https://vim.fandom.com/wiki/Find_in_files_within_Vim
-nmap <F3> :Search<Space>
-nmap <S-F3> :ESearch<Space>
-
 func Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
 
-cabbrev Search
-      \ vimgrep //j
-      \ *<C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <F3> :vimgrep //j *<C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
 
-" cabbrev Search
-"       \ vimgrep //j
-"       \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
-"       \ <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j *<C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
-cabbrev ESearch
-      \ vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j
-      \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
-      \ <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+noremap <A-F3> :vimgrep //j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+
+noremap <A-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
 "" AUTOCMD {{{
 if has('autocmd')
