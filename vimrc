@@ -32,7 +32,6 @@ let g:loaded_tarPlugin = 1
 call plug#begin()
 Plug 'mattn/calendar-vim'
 Plug 'mhinz/vim-startify'
-Plug 'mhinz/vim-sayonara'
 Plug 'ackyshake/VimCompletesMe', { 'frozen' : 1 }
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
@@ -261,10 +260,8 @@ if has('autocmd')
 endif
 "" }}}
 
-"" SAYONARA https://github.com/mhinz/vim-sayonara {{{
-nnoremap <silent> <leader>q :Sayonara!<cr>
-nnoremap <silent> <leader>c :Sayonara<cr>
-"" }}}
+nnoremap <silent> <leader>c :close<cr>
+nnoremap <silent> <leader>q :quit<cr>
 
 " Poor man bufexplorer
 nnoremap <leader>ls :ls<CR>:b<space>
