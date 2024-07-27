@@ -186,8 +186,7 @@ else
   set signcolumn=yes
 endif
 
-" No statusline, fold, vertical or diff fillchars
-set fillchars=
+set fillchars=fold:\ " No filling foldtext
 
 set nostartofline
 
