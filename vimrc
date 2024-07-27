@@ -44,8 +44,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'vim-airline/vim-airline'
 Plug 'mivok/vimtodo'
 Plug 'ryanoasis/vim-devicons'
-Plug 'yegappan/bufselect'
-Plug 'yegappan/fileselect'
 Plug 'preservim/tagbar', { 'for': 'markdown' }
 Plug 'AndrewRadev/quickpeek.vim'
 Plug 'dhruvasagar/vim-table-mode'
@@ -270,16 +268,6 @@ nnoremap <silent> <leader>c :Sayonara<cr>
 
 " Poor man bufexplorer
 nnoremap <leader>ls :ls<CR>:b<space>
-
-"" BUFSELECT https://github.com/yegappan/bufselect {{{
-nmap <F2> <Plug>Bufselect_Toggle
-nnoremap <leader>j :Bufselect<CR>
-"" }}}
-
-"" FILESELECT https://github.com/yegappan/fileselect {{{
-nmap <F4> <Plug>(FileselectToggle)
-" nnoremap <leader>f :Fileselect<CR>
-"" }}}
 
 if has('autocmd')
   if !&diff
