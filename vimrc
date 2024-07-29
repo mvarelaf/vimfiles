@@ -251,6 +251,7 @@ let html_use_css = 1 "Use CSS instead of <br> and a lot of &nbsp;
 "" }}}
 
 "" CALENDAR https://github.com/mattn/calendar-vim {{{
+let g:calendar_no_mappings = 1
 let g:calendar_monday = 1
 let g:calendar_weeknm = 2 " WK 1
 let g:calendar_mark = 'left-fit'
