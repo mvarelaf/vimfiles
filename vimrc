@@ -440,6 +440,10 @@ noremap <A-F3> :vimgrep //j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<
 
 noremap <A-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
+" enhance search with <space> as "whatever"
+" to enter literal <space> use <C-Q><space>
+cnoremap <expr> <space> getcmdtype() =~ '[/?]' ? '.\{-}' : "<space>"
+
 "" AUTOCMD {{{
 if has('autocmd')
    augroup fileTypes
