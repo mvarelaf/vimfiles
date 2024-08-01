@@ -297,6 +297,8 @@ endtry
 
 set noshowmode
 " AIRLINE https://github.com/vim-airline/vim-airline {{{
+let g:airline_skip_empty_sections = 1
+
 let g:airline_theme='distinguido'
 
 let g:airline_powerline_fonts = 1
