@@ -111,14 +111,8 @@ endif
 "snoremap <C-A> <C-C>gggH<C-O>G
 "xnoremap <C-A> <C-C>ggVG
 
-" CTRL-E is Select all
-noremap <C-E> gggH<C-O>G
-" conflicts with *popupmenu-completion* End completion
-" inoremap <C-E> <C-O>gg<C-O>gH<C-O>G
-inoremap <C-E> <C-R>=pumvisible() ? "\<lt>C-E>" : "\<lt>C-O>gg\<lt>C-O>gH\<lt>C-O>G"<CR>
-onoremap <C-E> <C-C>gggH<C-O>G
-snoremap <C-E> <C-C>gggH<C-O>G
-xnoremap <C-E> <C-C>ggVG
+" CTRL-E is Visually select all lines
+noremap <C-E> ggVG
 
 " " CTRL-Tab is Next window
 " " do not redefine default: Go to previous (last accessed) tab page.
