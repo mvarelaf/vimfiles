@@ -51,8 +51,7 @@ Plug 'preservim/tagbar', { 'for': 'markdown' }
 Plug 'AndrewRadev/quickpeek.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'junegunn/vim-easy-align'
-Plug 'habamax/vim-select'
-Plug 'habamax/vim-select-more'
+Plug 'girishji/scope.vim'
 
 Plug 'chrisbra/csv.vim', { 'on': [] }
 " call plug#load('csv.vim')
@@ -627,10 +626,4 @@ nmap ga <Plug>(EasyAlign)
 xmap <Leader>ga <Plug>(LiveEasyAlign)
 "" }}}
 
-"" VIM-SELECT https://github.com/habamax/vim-select {{{
-" see mappings in ~/vimfiles/after/plugin/select.vim
 
-let g:airline_filetype_overrides = {
-      \ 'selectresults': [ '%#Statusline#%{select#statusline_type()}', '%{select#statusline_progress()}' ],
-      \ }
-"" }}}
