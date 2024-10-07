@@ -24,9 +24,17 @@ if has('directx') && has('windows')
   set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 endif
 
+set guiligatures=!\"#$%&()*+-./:<=>?@[]^_{\|~
+
 set browsedir=buffer
 
 " winpos 1177 0   "right with Consolas:h10 with number and 21'' screen
 winpos 1127 0   "right with Consolas:h10 with number and 13.3'' screen
+
+" Non tracked local configuration
+if filereadable(expand("$MYVIMDIR")."\\gvimrc.local")
+  execute ":source " . expand("$MYVIMDIR")."\\gvimrc.local"
+endif
+
 set lines=999
 set columns=87

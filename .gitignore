@@ -5,6 +5,7 @@ pack/
 plugged/
 .netrwhist
 .selectprojects
+gvimrc.local
 
 ## Vim swap files
 *.swp
