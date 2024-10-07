@@ -189,7 +189,7 @@ else
   set signcolumn=yes
 endif
 
-set fillchars=fold:\ " No filling foldtext
+set fillchars=fold:\ ,stlnc:\— "Digr -M
 
 set nostartofline
 
