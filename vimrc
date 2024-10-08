@@ -143,9 +143,6 @@ endif
 set splitright
 set splitbelow
 
-" set noequalalways
-set equalalways eadirection=hor
-
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
