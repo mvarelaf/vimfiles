@@ -159,6 +159,8 @@ nnoremap çh <C-W>H
 nnoremap çl <C-W>L
 nnoremap çk <C-W>K
 nnoremap çj <C-W>J
+nnoremap çt <C-W>T
+nnoremap çx <C-W>x
 
 tnoremap çh <C-W>H
 tnoremap çl <C-W>L
