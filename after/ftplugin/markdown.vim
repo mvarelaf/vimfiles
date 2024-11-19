@@ -1,8 +1,7 @@
-" from Tim Pope <https://github.com/tpope/vim-markdown>
-nnoremap <silent><buffer> [[ :<C-U>call search('\%(^#\{1,5\}\s\+\S\\|^\S.*\n^[=-]\+$\)', "bsW")<CR>
-nnoremap <silent><buffer> ]] :<C-U>call search('\%(^#\{1,5\}\s\+\S\\|^\S.*\n^[=-]\+$\)', "sW")<CR>
-xnoremap <silent><buffer> [[ :<C-U>exe "normal! gv"<Bar>call search('\%(^#\{1,5\}\s\+\S\\|^\S.*\n^[=-]\+$\)', "bsW")<CR>
-xnoremap <silent><buffer> ]] :<C-U>exe "normal! gv"<Bar>call search('\%(^#\{1,5\}\s\+\S\\|^\S.*\n^[=-]\+$\)', "sW")<CR>
+if v:version > 901 || (v:version == 901 && has('patch831'))
+  packadd helptoc
+  nnoremap <silent><buffer> gO :HelpToc<cr>
+endif
 
 " https://25.wf/posts/2020-09-04-vim-markdown-text-object.html
 " or https://jdhao.github.io/2020/11/15/nvim_text_objects/
