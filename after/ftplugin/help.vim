@@ -5,6 +5,7 @@ nnoremap <silent> <buffer> <bs> <c-t>
 if v:version > 901 || (v:version == 901 && has('patch831'))
   packadd helptoc
   nnoremap <silent><buffer> gO :HelpToc<cr>
+  nnoremap <silent><buffer> <localleader>- :HelpToc<cr>
 else
   "Copied from NVIM
   if !exists('g:no_plugin_maps')

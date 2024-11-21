@@ -1,6 +1,7 @@
 if v:version > 901 || (v:version == 901 && has('patch831'))
   packadd helptoc
   nnoremap <silent><buffer> gO :HelpToc<cr>
+  nnoremap <silent><buffer> <localleader>- :HelpToc<cr>
 endif
 
 " https://25.wf/posts/2020-09-04-vim-markdown-text-object.html
