@@ -93,6 +93,8 @@ set shortmess+=w    " w use "[w]" instead of "written" for file write message
                     " and "[a]" instead of "appended" for ':w >> file' command
 set shortmess+=x    " x use "[dos]" instead of "[dos format]", "[unix]" instead of
                     "[unix format]" and "[mac]" instead of "[mac format]".
+set shortmess+=c    " don't give |ins-completion-menu| messages
+set shortmess+=C    " don't give messages while scanning for ins-completion
 
 set suffixes+=.pyc,.pyo,.egg-info,.class
 
