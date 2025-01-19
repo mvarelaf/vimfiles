@@ -249,6 +249,7 @@ highlight! link CursorLineFold FoldColumn
 highlight! link CursorLineSign SignColumn
 highlight! link LineNrAbove    LineNr
 highlight! link LineNrBelow    LineNr
+highlight! link PopupSelected  PmenuSel
 
 " Base groups: only these groups + Normal will form the foundation of syntax highlighting
 highlight! link  Comment  TextLightGray
