@@ -441,13 +441,17 @@ func Eatchar(pat)
   return (c =~ a:pat) ? '' : c
 endfunc
 
-noremap <F3> :vimgrep //j *<C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <F3> :vimgrep //j <C-R>=expand("%:.:h")<CR>/*<C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <C-F3> :vimgrep //j <C-R>=expand("%:.:h")<CR>/**<C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
 
-noremap <S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j *<C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+noremap <S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j <C-R>=expand("%:.:h")<CR>/*<C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+noremap <C-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j <C-R>=expand("%:.:h")<CR>/**<C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
-noremap <A-F3> :vimgrep //j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <A-F3> :vimgrep //j <C-R>=expand("%:.:h")<CR>/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
+noremap <C-A-F3> :vimgrep //j <C-R>=expand("%:.:h")<CR>/**<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><C-R>=Eatchar('\s')<CR>
 
-noremap <A-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+noremap <A-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j <C-R>=expand("%:.:h")<CR>/*<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
+noremap <C-A-S-F3> :vimgrep /\<lt><C-R>=expand("<cword>")<CR>\>/j <C-R>=expand("%:.:h")<CR>/**<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR> <C-Left><C-Left><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
 " enhance search with <space> as "whatever"
 " to enter literal <space> use <C-Q><space>
