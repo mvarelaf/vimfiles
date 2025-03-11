@@ -7,8 +7,6 @@ let g:startify_skiplist = [
       \ '.*\\vimfiles\\.*\\doc\\.*',
       \ ]
 
-let g:startify_session_dir=expand("$USERPROFILE").'\vimfiles\startify-sessions'
-
 let g:startify_custom_header = []
 
 if g:machine =~ 'E3000*'

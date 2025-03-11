@@ -1,6 +1,6 @@
 ##Ignored particular files and folders
 spell/
-startify-sessions/
+session/
 pack/
 plugged/
 .netrwhist
