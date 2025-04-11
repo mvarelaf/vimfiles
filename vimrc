@@ -155,10 +155,19 @@ if v:version > 704 || (v:version == 704 && has('patch401'))
 endif
 
 " ignore whitespace in diff mode
+set diffopt=filler,closeoff
 set diffopt+=iwhite,vertical
 if has("patch-8.1.0360") "from chrisbra/vim-diff-enhanced
   set diffopt+=algorithm:patience "myers is default algorithm
   set diffopt+=indent-heuristic
+else
+  set diffopt+=internal
+endif
+
+if has("patch-9.1.1243")
+  set diffopt+=inline:char
+else
+  set diffopt+=inline:simple
 endif
 
 if has('linebreak')
