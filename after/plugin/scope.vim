@@ -15,7 +15,7 @@ if exists("g:loaded_scope")
   nnoremap <localleader>+ <scriptcmd>fuzzy.BufSearch()<cr>
 
   # ripgrep
-  nnoremap <localleader>g <scriptcmd>fuzzy.Grep('rg --vimgrep --no-heading --smart-case')<cr>
+  nnoremap <localleader>gg <scriptcmd>fuzzy.Grep('rg --vimgrep --no-heading --smart-case')<cr>
 
   nnoremap <localleader>m <scriptcmd>fuzzy.Mark()<cr>
   nnoremap <localleader>r <scriptcmd>fuzzy.Register()<cr>
@@ -30,6 +30,8 @@ if exists("g:loaded_scope")
   nnoremap <localleader>w <scriptcmd>fuzzy.Window()<cr>
 
   nnoremap <localleader>h <scriptcmd>fuzzy.Help()<cr>
+
+  nnoremap <localleader>gq <scriptcmd>fuzzy.QuickfixHistory()<cr>
 endif
 
 # fuzzy.Autocmd(): Vim autocommands, go to their declaration on <cr>
