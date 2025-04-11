@@ -402,6 +402,10 @@ nnoremap <C-g> 2<C-g>
 " Highlight all occurrences of current word without moving
 " nnoremap <leader>* :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
+if has("patch-9.1.1227")
+  packadd hlyank
+endif
+
 " Open files located in the same dir in with the current file is edited
 nnoremap <leader>e :e <C-R>=expand("%:.:h") . "/"<CR>
 " 'cd' towards the directory in which the current file is edited
