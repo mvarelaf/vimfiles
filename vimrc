@@ -145,6 +145,10 @@ endif
 set splitright
 set splitbelow
 
+if has("patch-9.1.0572")
+  set tabclose=uselast,left
+endif
+
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
