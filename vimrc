@@ -273,11 +273,17 @@ if has('autocmd')
 endif
 "" }}}
 
-nnoremap <silent> <leader>c :close<cr>
-nnoremap <silent> <leader>q :quit<cr>
+nnoremap <leader>c <Cmd>exe (v:count ?? "") . "close"<CR>
+nnoremap <leader>q <Cmd>exe (v:count ?? "") . "quit"<CR>
+
 
 " Poor man bufexplorer
 nnoremap <leader>ls :ls<CR>:b<space>
+
+nnoremap <leader>s <C-W>s
+nnoremap <leader>v <C-W>v
+nnoremap <leader>t <Cmd>tab split<CR>
+nnoremap <C-t> <Cmd>tab split<CR>
 
 if has('autocmd')
   if !&diff
@@ -624,10 +630,8 @@ if has('autocmd')
 endif
 "" }}}
 
+" STARTIFY https://github.com/mhinz/vim-startify
 " after/plugin/startify.vim
-nnoremap <silent> <leader>s :split<bar>Startify<cr>
-nnoremap <silent> <leader>v :vsplit<bar>Startify<cr>
-nnoremap <silent> <leader>t :tabnew<bar>Startify<cr>
 
 "" TAGBAR https://github.com/preservim/tagbar {{{
 " https://github.com/majutsushi/tagbar

@@ -1,3 +1,5 @@
+nnoremap <silent> <buffer> gq :wincmd c<CR>
+
 " make navigating tags easier.
 nnoremap <silent> <buffer> <cr> <c-]>
 nnoremap <silent> <buffer> <bs> <c-t>

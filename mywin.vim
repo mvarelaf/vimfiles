@@ -154,7 +154,22 @@ tnoremap <A-Right> <C-W>l
 tnoremap <A-Up>    <C-W>k
 tnoremap <A-Down>  <C-W>j
 
-" Move window
+" Open window
+nnoremap çs <C-W>s
+nnoremap çv <C-W>v
+
+tnoremap çs <C-W>s
+tnoremap çv <C-W>v
+
+" Close window
+nnoremap çc <C-W>c
+nnoremap çq <C-W>q
+
+" Terminal-Normal mode
+tnoremap çc <C-W>N
+tnoremap çq <C-W>N
+
+" Move window position
 nnoremap çh <C-W>H
 nnoremap çl <C-W>L
 nnoremap çk <C-W>K
@@ -166,10 +181,21 @@ tnoremap çh <C-W>H
 tnoremap çl <C-W>L
 tnoremap çk <C-W>K
 tnoremap çj <C-W>J
+tnoremap çx <C-W>x
 
 " Equal size
-nnoremap ç0 <C-W>=
+nnoremap çç <C-W>=
 nnoremap çñ <C-W>=
+
+tnoremap çç <C-W>=
+tnoremap çñ <C-W>=
+
+" Jump to Next window
+nnoremap ç<Tab> <C-W>w
+nnoremap çw     <C-W>w
+
+tnoremap ç<Tab> <C-W>w
+tnoremap çw     <C-W>w
 
 " Jump to window <n>:
 " http://stackoverflow.com/a/6404246/151007
@@ -177,11 +203,18 @@ for i in range(1, 9)
   execute 'nnoremap <silent> <Leader>'.i.' :'.i.'wincmd w<CR>'
   execute 'nnoremap <silent> <A-'.i.'> :'.i.'wincmd w<CR>'
   execute 'nnoremap <silent> ç'.i.' :'.i.'wincmd w<CR>'
+
+  execute 'tnoremap <silent> ç'.i.' :'.i.'wincmd w<CR>'
 endfor
+
 " Jump to previous window:
 nnoremap <silent> <Leader>0 :wincmd p<CR>
 nnoremap <silent> <A-0> :wincmd p<CR>
-nnoremap <silent> çç :wincmd p<CR>
+nnoremap <silent> ç0 :wincmd p<CR>
+nnoremap <silent> çp :wincmd p<CR>
+
+tnoremap ç0 <C-W>p
+tnoremap çp <C-W>p
 
 " CTRL-F is the search dialog also in console mode
 noremap  <expr> <C-F> "/\\v<C-Left>"
