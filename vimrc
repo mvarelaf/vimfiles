@@ -442,6 +442,10 @@ nnoremap <silent> <S-F1> :call Preserve("%s/\\s\\+$//e")<CR>
 
 vnoremap <silent> <S-F1> :retab<CR>
 
+" duplicate line (from habamax)
+nnoremap <C-j> <Cmd>copy.<CR>
+nnoremap <C-k> <Cmd>copy-1<CR>
+
 " Move lines of current visual selection
 xnoremap <silent> J :m '>+1<CR>gv
 xnoremap <silent> K :m '<-2<CR>gv
