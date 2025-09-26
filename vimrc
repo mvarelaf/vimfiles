@@ -171,6 +171,10 @@ if has("patch-8.1.0360") "from chrisbra/vim-diff-enhanced
   set diffopt+=indent-heuristic
 endif
 
+if has("patch-9.1.1009")
+  set diffopt+=linematch:60
+endif
+
 if has("patch-9.1.1243")
   set diffopt+=inline:char
 else
