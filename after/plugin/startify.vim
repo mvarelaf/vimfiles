@@ -15,6 +15,7 @@ let g:startify_custom_header = []
 
 if g:machine =~ 'E3000*'
   let g:startify_bookmarks = [
+        \ {'g': expand("$MYVIMDIR").'gvimrc.local' },
         \ {'l': expand("$USERPROFILE").'\Documents\notas\links.txt' },
         \ {'p': expand("$USERPROFILE").'\Desktop\INFOP.txt' },
         \ {'c': expand("$MYVIMRC") }
@@ -26,6 +27,11 @@ else
 endif
 
 let g:startify_files_number = 20
+
+let g:startify_commands = [
+      \ {'x': [' terminal', 'terminal ++curwin']},
+      \ {'s': [':-)', 'smile']},
+      \ ]
 
 " \ { 'type': 'dir',       'header': ['   MRU '.getcwd()]  },
 let g:startify_lists = [
