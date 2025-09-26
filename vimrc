@@ -133,9 +133,14 @@ endif
 set nojoinspaces " Use only 1 space after "." when joining lines, not 2
 
 if has('insert_expand')
-  " set completeopt=menuone,noinsert,noselect
-  " set completeopt=menuone,noinsert,preview "menu,preview "is the default
-  set completeopt=menuone,preview "menu,preview "is the default
+  set completeopt=menuone
+  if has('textprop')
+    set completeopt+=popup,fuzzy
+  endif
+
+  inoremap <silent> <expr> <C-Space> pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"
+  inoremap <silent> <expr> <Right> pumvisible() ? "\<lt>C-Y>" : "\<lt>Right>"
+  inoremap <silent> <expr> <Left> pumvisible() ? "\<lt>C-E>" : "\<lt>Left>"
 endif
 
 if has('mksession')
@@ -231,7 +236,6 @@ endif
 " endif
 "" }}}
 
-inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
 
 "" Abbreviations {{{
 "iab _fecha <C-R>=strftime("%a %b %d %T %Z %Y")<CR><C-R>=Eatchar('\s')<CR>
