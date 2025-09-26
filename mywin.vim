@@ -76,9 +76,9 @@ noremap <C-Q> <C-V>
 
 " Use CTRL-S for saving, also in Insert mode (<C-O> doesn't work well when
 " using completions).
-noremap <C-S>  :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <Esc>:update<CR>gi
+noremap  <silent> <C-S> :update<CR>
+vnoremap <silent> <C-S> <C-C>:update<CR>
+inoremap <silent> <C-S> <Esc>:update<CR>gi
 
 " For CTRL-V to work autoselect must be off.
 " On Unix we have two selections, autoselect can be used.
@@ -94,7 +94,7 @@ inoremap <C-Z> <C-O>u
 noremap <C-Y> <C-R>
 " conflict with *popupmenu-completion* Accept currently selected match
 " inoremap <C-Y> <C-O><C-R>
-inoremap <C-Y> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>C-O>\<lt>C-R>"<CR>
+inoremap <expr> <C-Y> pumvisible() ? "\<lt>C-Y>" : "\<lt>C-O>\<lt>C-R>"
 
 " Alt-Space is System menu
 if has("gui")

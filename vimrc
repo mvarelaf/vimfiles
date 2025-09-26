@@ -234,13 +234,13 @@ endif
 inoremap <C-Space> <C-R>=pumvisible() ? "\<lt>C-Y>" : "\<lt>Space>"<CR>
 
 "" Abbreviations {{{
-iab _hoy <C-R>=strftime("%d.%m.%Y")<CR><C-R>=Eatchar('\s')<CR>
-iab _time <C-R>=strftime("%H:%M:%S")<CR><C-R>=Eatchar('\s')<CR>
-iab _dates <C-R>=strftime("%d/%m/%Y %H:%M")<CR><C-R>=Eatchar('\s')<CR>
 "iab _fecha <C-R>=strftime("%a %b %d %T %Z %Y")<CR><C-R>=Eatchar('\s')<CR>
-iab _date <C-R>=strftime("%A %d %B %Y %H:%M")<CR><C-R>=Eatchar('\s')<CR>
-iab _iso_date <C-R>=strftime("%FT%T%z")<CR><C-R>=Eatchar('\s')<CR>
-iab _rfc_date <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=Eatchar('\s')<CR>
+iab <silent> <expr> _hoy      strftime("%d.%m.%Y").Eatchar('\s')
+iab <silent> <expr> _time     strftime("%H:%M:%S").Eatchar('\s')
+iab <silent> <expr> _dates    strftime("%d/%m/%Y %H:%M").Eatchar('\s')
+iab <silent> <expr> _date     strftime("%A %d %B %Y %H:%M").Eatchar('\s')
+iab <silent> <expr> _iso_date strftime("%FT%T%z").Eatchar('\s')
+iab <silent> <expr> _rfc_date strftime("%a, %d %b %Y %H:%M:%S %z").Eatchar('\s')
 
 " Too many mistakes
 cabbrev W   w
